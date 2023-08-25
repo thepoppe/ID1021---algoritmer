@@ -3,25 +3,28 @@ import java.util.Random;
 
 import static java.lang.System.*;
 
+/**
+ * Main benchmarks some test with the arrays
+ */
 public class Main {
     public static void main(String[] args) {
 
-        String line = "\n--------------------------------------------------\n\n";
+        String line = "--------------------------------------------------\n";
         long t0, t1;
         int sum;
         int[] givenArray = {1, 2, 3, 4, 5, 6, 7, 8, 9, 0};
 
-        out.println(line + "Test with arrays starts" + line);
+        out.println(line + "Test with arrays starts" + line + "\n");
         out.println("Test for testing the clock;");
         for (int i = 0; i < 10; i++) {
             t0 = nanoTime();
             t1 = nanoTime();
             out.println("Res = " + (t1 - t0) + " ns");
         }
-        out.println(line);
 
 
-        out.println("Test for accessing 1 element in an array");
+
+        out.println("\n" + line +"Test for accessing 1 element in an array");
         sum = 0;
         for (int i = 0; i < 10; i++) {
             t0 = nanoTime();
@@ -46,7 +49,7 @@ public class Main {
         int n = Integer.parseInt(args[0]);
         for (int i = 0; i < 10; i++) {
             double t = access(n);
-            System.out.println(" access: " + t + " ns");
+            out.println(" access: " + t + " ns");
         }
 
         out.println(line + "Test with sorting the arrays");
@@ -59,11 +62,12 @@ public class Main {
             sum += t;
 
         }
+
         Arrays.sort(time);
-        System.out.println(" avg: " + sum/turns);
-        System.out.println(" min: " + time[0]);
-        System.out.println(" med: " + time[turns/2]);
-        System.out.println(" max: " + time[turns-1]);
+        out.println(" avg: " + sum/turns);
+        out.println(" min: " + time[0]);
+        out.println(" med: " + time[turns/2]);
+        out.println(" max: " + time[turns-1]);
 
 
 
@@ -72,7 +76,7 @@ public class Main {
         bench(1000);
         for(int size : sizes) {
             double t = bench(size);
-            System.out.println(size + " " + t);
+            out.println(size + " " + t);
         }
 
 
@@ -81,19 +85,23 @@ public class Main {
         search(1000);
         for(int key : keys) {
             double t = search(key);
-            System.out.println(key + " " + t);
+            out.println(key + " " + t);
         }
 
         out.println(line + "Test to find a duplicate of a specific value");
         searchDuplicate(1000);
         for(int key : keys) {
             double t = searchDuplicate(key);
-            System.out.println(key + " " + t);
+         out.println(key + " " + t);
         }
 
-
-
     }
+
+    /**
+     * Parts copied from Array.pdf from kth
+     * @param n The arraySize to test
+     * @return the fastest time to access one random element in the array
+     */
     private static double searchDuplicate(int n){
         int loop = 1000;
         Random random = new Random();
@@ -109,26 +117,32 @@ public class Main {
             keys[k] = random.nextInt(n*2);
         }
         int sum = 0;
-        long t0 = System.nanoTime();
+        long t0 = nanoTime();
         for (int i = 0; i < loop; i++) {
             int key = keys[i];
             for (int j = 0; j < n; j++) {
                 if (key == firstArray[j]) {
-                    sum++;
-                    for(int k =0; k < n; k++) {
-                        if (key == secondArray[k]) ;
-                        sum++;
-                        break;
+                    for(int k = 0; k < n; k++) {
+                        if (key == secondArray[k]) {
+                            sum++;
+                            break;
+                        }
                     }
                 }
             }
         }
-        long t1 = System.nanoTime();
+        long t1 = nanoTime();
         return (double)(t1 - t0)/loop;
 
 
     }
 
+
+    /**
+     * Copied from Array.pdf from kth
+     * @param n The arraySize to test
+     * @return the fastest time to access one random element in the array
+     */
     private static double search(int n) {
         int loop = 1000;
         Random rnd = new Random();
@@ -141,7 +155,7 @@ public class Main {
             keys[k] = rnd.nextInt(n*2);
         }
         int sum = 0;
-        long t0 = System.nanoTime();
+        long t0 = nanoTime();
         for (int i = 0; i < loop; i++) {
             int key = keys[i];
             for (int j = 0; j < n; j++) {
@@ -151,20 +165,20 @@ public class Main {
                 }
             }
         }
-        long t1 = System.nanoTime();
+        long t1 = nanoTime();
         return (double)(t1 - t0)/loop;
 
 
     }
 
     /**
-     * Copied from Array.pdf kth
+     * Copied from Array.pdf from kth
      * @param n The arraySize to test
      * @return the fastest time to access one random element in the array
      */
     public static double bench(int n) {
         int turns = 1000;
-        double min = Double.POSITIVE_INFINITY;;
+        double min = Double.POSITIVE_INFINITY;
         for (int i = 0; i < turns; i++) {
             double t = access(n);
             if (t < min) {
@@ -177,7 +191,7 @@ public class Main {
 
 
     /**
-     * Copied from Array.pdf kth
+     * Copied from Array.pdf from kth
      * @param n The arraySize to test
      * @return the time to access one random element in the array
      */
@@ -185,17 +199,17 @@ public class Main {
         int loop = 1000;
         int[] array = new int[n];
         for (int i = 0; i < n; i++) array[i] = i;
-        int[] indx = new int[loop];
+        int[] index = new int[loop];
         Random rnd = new Random();
         for (int k = 0; k < loop; k++) {
-            indx[k] = rnd.nextInt(n);
+            index[k] = rnd.nextInt(n);
         }
-        long t0 = System.nanoTime();
+        long t0 = nanoTime();
         int sum = 0;
         for (int k = 0; k < loop; k++) {
-            sum += array[indx[k]];
+            sum += array[index[k]];
         }
-        long t1 = System.nanoTime();
+        long t1 = nanoTime();
         return (double)(t1 - t0)/loop;
     }
 
