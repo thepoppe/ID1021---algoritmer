@@ -18,6 +18,7 @@ public class Main {
         out.println("Test for testing the clock;");
         for (int i = 0; i < 10; i++) {
             t0 = nanoTime();
+
             t1 = nanoTime();
             out.println("Res = " + (t1 - t0) + " ns");
         }
@@ -46,7 +47,7 @@ public class Main {
 
 
         out.println(line + "Test to access random element in an array using method access from pdf");
-        int n = Integer.parseInt(args[0]);
+        int n = 1000;
         for (int i = 0; i < 10; i++) {
             double t = access(n);
             out.println(" access: " + t + " ns");
