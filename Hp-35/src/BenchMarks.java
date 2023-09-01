@@ -7,10 +7,11 @@ public class BenchMarks {
 
     }
     private static void runBench(){
-        Stack staticStack = new StaticStack(1024);
+        Stack staticStack = new StaticStack(102400);
         Stack dynamicStack = new DynamicStack(4);
         int rounds = 100000;
-        run(100000,dynamicStack);
+        run(10000,staticStack);
+        run(10000,dynamicStack);
 
         System.out.println("The 100 minimum static results");
         long[] staticResults = run(rounds,staticStack);
@@ -50,21 +51,20 @@ public class BenchMarks {
     private static long[] run(int rounds, Stack stack){
         long[] results = new long[rounds];
         for (int i = 0; i  < rounds; i++){
-            results[i] = pushAndPop(stack);
+            results[i] = pushAndPop1000x(stack);
         }
         Arrays.sort(results);
         return results;
     }
 
-    private static long pushAndPop(Stack stack) {
-
+    private static long pushAndPop1000x(Stack stack) {
         long t0,t1;
-        int sum;
+        int sum = 0;
         t0 = System.nanoTime();
         for (int i = 0; i < 1000; i++)
-            stack.push(11111);
+            stack.push(1);
         for(int i = 0; i < 1000; i++)
-            sum = stack.pop();
+            sum += stack.pop();
         t1 = System.nanoTime();
         long time = (t1-t0);
         return time;

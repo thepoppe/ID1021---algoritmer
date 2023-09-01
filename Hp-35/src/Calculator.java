@@ -1,9 +1,9 @@
 public class Calculator {
-    mathOperation[] expression;
+    MathOperation[] expression;
     int instructionPointer;
     Stack stack;
 
-    public Calculator(mathOperation[] expression, Stack stack) {
+    public Calculator(MathOperation[] expression, Stack stack) {
         this.expression = expression;
         this.instructionPointer = 0;
         this.stack = stack;
@@ -12,7 +12,7 @@ public class Calculator {
         this.stack = newStack;
     }
 
-    public void setExpression(mathOperation[] expression) {
+    public void setExpression(MathOperation[] expression) {
         this.expression = expression;
         this.instructionPointer = 0;
     }
@@ -27,7 +27,7 @@ public class Calculator {
 
     public void step() {
 
-        mathOperation nextOperation = expression[instructionPointer++];
+        MathOperation nextOperation = expression[instructionPointer++];
         switch (nextOperation.getType()) {
             case ADD -> {
                 int y = stack.pop();

@@ -10,46 +10,46 @@ public class Main {
 
 
 
-        mathOperation[] expr1 = {
-                mathOperation.Value(10),
-                mathOperation.Value(2),
-                mathOperation.Value(5),
-                mathOperation.Mul(),
-                mathOperation.Add()
+        MathOperation[] expr1 = {
+                MathOperation.Value(10),
+                MathOperation.Value(2),
+                MathOperation.Value(5),
+                MathOperation.Mul(),
+                MathOperation.Add()
         };
 
-        mathOperation[] expr2 = {
-                mathOperation.Value(1),
-                mathOperation.Value(2),
-                mathOperation.Value(3),
-                mathOperation.Value(4),
-                mathOperation.Value(5),
-                mathOperation.Value(6),
-                mathOperation.Value(7),
-                mathOperation.Value(8),
-                mathOperation.Value(9),
-                mathOperation.Value(10),
-                mathOperation.Value(11),
-                mathOperation.Value(12),
-                mathOperation.Value(13),
-                mathOperation.Value(14),
-                mathOperation.Value(15),
-                mathOperation.Value(16),
-                mathOperation.Add(),
-                mathOperation.Mul(),
-                mathOperation.Add(),
-                mathOperation.Mul(),
-                mathOperation.Add(),
-                mathOperation.Mul(),
-                mathOperation.Add(),
-                mathOperation.Mul(),
-                mathOperation.Add(),
-                mathOperation.Mul(),
-                mathOperation.Add(),
-                mathOperation.Mul(),
-                mathOperation.Add(),
-                mathOperation.Mul(),
-                mathOperation.Add()
+        MathOperation[] expr2 = {
+                MathOperation.Value(1),
+                MathOperation.Value(2),
+                MathOperation.Value(3),
+                MathOperation.Value(4),
+                MathOperation.Value(5),
+                MathOperation.Value(6),
+                MathOperation.Value(7),
+                MathOperation.Value(8),
+                MathOperation.Value(9),
+                MathOperation.Value(10),
+                MathOperation.Value(11),
+                MathOperation.Value(12),
+                MathOperation.Value(13),
+                MathOperation.Value(14),
+                MathOperation.Value(15),
+                MathOperation.Value(16),
+                MathOperation.Add(),
+                MathOperation.Mul(),
+                MathOperation.Add(),
+                MathOperation.Mul(),
+                MathOperation.Add(),
+                MathOperation.Mul(),
+                MathOperation.Add(),
+                MathOperation.Mul(),
+                MathOperation.Add(),
+                MathOperation.Mul(),
+                MathOperation.Add(),
+                MathOperation.Mul(),
+                MathOperation.Add(),
+                MathOperation.Mul(),
+                MathOperation.Add()
         };
 
 
@@ -60,7 +60,7 @@ public class Main {
 
         calc.setExpression(expr2);
         result = calc.run();
-        System.out.println(" Calculator with dynamic stack:\result = " + result);
+        System.out.println(" Calculator with dynamic stack:\nresult = " + result);
 
         calc.setStack(new StaticStack(100));
         calc.setExpression(expr2);

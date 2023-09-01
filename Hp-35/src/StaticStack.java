@@ -8,7 +8,12 @@ public class StaticStack extends Stack {
         stackPointer = -1;
     }
 
+    public void push(int i) {
+        if(stackPointer == memorySlot.length-1)
+            throw new IllegalArgumentException("Stack is Full");
 
+        memorySlot[++stackPointer] = i;
+    }
     public int pop() {
         if (stackPointer < 0)
             throw new IllegalArgumentException("Stack is empty");
@@ -16,11 +21,6 @@ public class StaticStack extends Stack {
         return memorySlot[stackPointer--];
     }
 
-    public void push(int i) {
-        if(stackPointer == memorySlot.length-1)
-            throw new IllegalArgumentException("Stack is Full");
 
-        memorySlot[++stackPointer] = i;
-    }
 
 }
