@@ -8,7 +8,73 @@ import static java.lang.System.*;
  */
 public class Main {
     public static void main(String[] args) {
+    testDuplicate();
 
+
+    }
+
+    public static void testDuplicate() {
+        int[] arraySize = {100,200,400,800,1600};
+        out.printf("%10s%15s\n", "Size", "Time");
+
+
+        searchDuplicate(1000, 100);
+        for (int size : arraySize) {
+            int numRuns = 1;
+            for (int i = 0; i < numRuns; i++) {
+                double time = searchDuplicate(size, 1);
+
+                out.printf("%10d%15.2f\n", size, time);
+            }
+
+
+
+        }
+    }
+
+// Rest of your code remains unchanged
+
+
+    public static double findDuplicatesLinear(int[] array1, int[] array2) {
+        int sum =0;
+        double t0 = System.nanoTime();
+        for (int num1 : array1) {
+            for (int num2 : array2) {
+                if (num1 == num2) {
+                    sum++;
+                }
+            }
+        }
+        double t1 = System.nanoTime();
+        return (t1-t0);
+    }
+
+
+    private static double searchDuplicate(int size, int rounds){
+        Random random = new Random();
+        int sum = 0, sum2 = 0;
+
+        double minTime = Double.POSITIVE_INFINITY;
+        for (int i = 0; i < rounds; i++) {
+            double time  = findDuplicatesLinear(unsortedList(size), unsortedList(size));
+
+            if (time < minTime) {
+                minTime = time;
+            }
+        }
+        //out.println("Sum1: "+sum+"\t\tSum2: "+sum2 + "\t\tsum1-sum2: " + (sum-sum2));
+        return minTime;
+
+    }
+    public static int[] unsortedList(int size) {
+        Random random = new Random();
+        int[] createdList = new int[size];
+        for (int i = 0; i < size; i++)
+            createdList[i] = random.nextInt(size * 4);
+        return createdList;
+    }
+
+    private static void test1(){
         String line = "--------------------------------------------------\n";
         long t0, t1;
         int sum;
@@ -93,9 +159,8 @@ public class Main {
         searchDuplicate(1000);
         for(int key : keys) {
             double t = searchDuplicate(key);
-         out.println(key + " " + t);
+            out.println(key + " " + t);
         }
-
     }
 
     /**

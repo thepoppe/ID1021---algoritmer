@@ -7,7 +7,5 @@
     </content>
     <orderEntry type="jdk" jdkName="19" jdkType="JavaSDK" />
     <orderEntry type="sourceFolder" forTests="false" />
-    <orderEntry type="module" module-name="SortedUnsortedList" />
-    <orderEntry type="module" module-name="SortedUnsortedList" />
   </component>
 </module>

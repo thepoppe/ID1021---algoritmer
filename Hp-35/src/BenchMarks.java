@@ -2,32 +2,53 @@ import java.util.Arrays;
 
 public class BenchMarks {
     public static void main(String[] args) {
-        for(int i= 0; i < 10;i++)
-            runBench();
+        runBenchDifferentLoops();
+
+
+    }
+    private static void runBenchDifferentLoops(){
+        Stack staticStack = new StaticStack(64400);
+        Stack dynamicStack = new DynamicStack(4);
+        int rounds = 100000;
+        int[] loops = {1000,2000,4000,8000,16000,32000,64000};
+        System.out.println("Warming up the cache");
+        run(1000,10000,staticStack);
+        run(1000,10000,dynamicStack);
+
+        System.gc();
+        System.out.println("The results");
+        System.out.println("\tn\t\t|\t\tstat\t\t|\t\tdyna\t\t|\t\tRatio");
+
+        for (int loop : loops) {
+            long[] static_results =  run(loop,rounds,staticStack);
+            long[] dynamic_results =  run(loop,rounds,dynamicStack);
+            System.out.printf("\t%d\t|\t\t%4d\t\t|\t\t%d\t\t|\t\t%.2f\n"
+                    ,loop,static_results[0],dynamic_results[0],(float)dynamic_results[0]/static_results[0]);
+        }
 
     }
     private static void runBench(){
-        Stack staticStack = new StaticStack(102400);
+        int rounds = 10000;
+        int loops = 1000;
+        Stack staticStack = new StaticStack(loops);
         Stack dynamicStack = new DynamicStack(4);
-        int rounds = 100000;
-        run(10000,staticStack);
-        run(10000,dynamicStack);
+        run(loops,rounds, staticStack);
+        run(loops,rounds, dynamicStack);
 
         System.out.println("The 100 minimum static results");
-        long[] staticResults = run(rounds,staticStack);
+        long[] staticResults = run(loops,rounds,staticStack);
         long[] sortedStatic = find100Min(staticResults);
         System.out.println(Arrays.toString(sortedStatic));
 
         System.out.println("\nThe 100 minimum dynamic results");
-        long[] dynamicResults = run(rounds,dynamicStack);
+        long[] dynamicResults = run(loops,rounds,dynamicStack);
         long[] sortedDynamic = find100Min(dynamicResults);
         System.out.println(Arrays.toString(sortedDynamic));
         System.out.println();
 
-        System.out.println("\nThe median value from static : " + median(staticResults));
-        System.out.println("The 10 avg worst value from static : " + worst10Avg(staticResults));
+        System.out.println("\nThe median value from static : " + median(staticResults));;
         System.out.println("The median value from dynamic : " + median(dynamicResults));
-        System.out.println("The 10 avg worst value from dynamic : " + worst10Avg(dynamicResults));
+        System.out.println("The ratio: " + (double) sortedDynamic[0]/sortedStatic[0]);
         System.out.println("\n");
 
     }
@@ -48,25 +69,24 @@ public class BenchMarks {
         System.arraycopy(allResults,0,minimum100,0,100);
         return minimum100;
     }
-    private static long[] run(int rounds, Stack stack){
+    private static long[] run(int loops, int rounds, Stack stack){
         long[] results = new long[rounds];
         for (int i = 0; i  < rounds; i++){
-            results[i] = pushAndPop1000x(stack);
+            results[i] = pushAndPop(loops, stack);
         }
         Arrays.sort(results);
         return results;
     }
 
-    private static long pushAndPop1000x(Stack stack) {
+    private static long pushAndPop(int loops, Stack stack) {
         long t0,t1;
-        int sum = 0;
         t0 = System.nanoTime();
-        for (int i = 0; i < 1000; i++)
-            stack.push(1);
-        for(int i = 0; i < 1000; i++)
-            sum += stack.pop();
+        for (int i = 0; i < loops; i++)
+            stack.push(10);
+        for(int i = 0; i < loops; i++)
+            stack.pop();
         t1 = System.nanoTime();
-        long time = (t1-t0);
-        return time;
+        return (t1-t0);
+
     }
 }
