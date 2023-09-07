@@ -20,9 +20,9 @@ public class Main {
 
         searchDuplicate(1000, 100);
         for (int size : arraySize) {
-            int numRuns = 1;
+            int numRuns = 10;
             for (int i = 0; i < numRuns; i++) {
-                double time = searchDuplicate(size, 1);
+                double time = searchDuplicate(size);
 
                 out.printf("%10d%15.2f\n", size, time);
             }
@@ -175,22 +175,22 @@ public class Main {
         int[] secondArray = new int[n];
 
         for(int i = 0; i < n; i++){
-            firstArray[i] = random.nextInt(n*2);
-            secondArray[i] = random.nextInt(n*2);
+            firstArray[i] = random.nextInt(n*4);
+            secondArray[i] = random.nextInt(n*4);
         }
         int[] keys = new int[loop];
         for (int k = 0; k < loop; k++) {
             keys[k] = random.nextInt(n*2);
         }
-        int sum = 0;
+
         long t0 = nanoTime();
         for (int i = 0; i < loop; i++) {
             int key = keys[i];
+
             for (int j = 0; j < n; j++) {
                 if (key == firstArray[j]) {
                     for(int k = 0; k < n; k++) {
                         if (key == secondArray[k]) {
-                            sum++;
                             break;
                         }
                     }

@@ -1,7 +1,7 @@
 public class Search {
     public static boolean linearSearch(int[] array, int key) {
-        for (int index = 0; index < array.length ; index++) {
-            if (array[index] == key) {
+        for (int i : array) {
+            if (i == key) {
                 return true;
             }
         }
