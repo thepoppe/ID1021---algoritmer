@@ -91,27 +91,33 @@ public class Main {
     }
 
     private static void duplicateFirstTest(){
-        int rounds = 100000;
-        int[] arraySizes = {100,200,400,800,1600};
-        double[] results = new double[arraySizes.length *2];
-        System.out.printf("Array size grows by 2x\n%10s %15s %15s\n","Size","Linear", "Binary");
-        for (int i = 0; i < arraySizes.length; i++) {
+        int rounds = 10000;
+        int[] arraySizes = {100,200,400,800,1600,3200,6400,12800};
+        int listLength = arraySizes.length;
+        double[] results = new double[listLength *3];
+        System.out.printf("Array size grows by 2x\n%10s %15s %15s %15s\n","Size","Linear", "Binary","Pointer");
+        for (int i = 0; i < listLength; i++) {
             int size = arraySizes[i];
             int[] firstArray = ArrayFiller.unsortedList(size);
             int[] secondArray = ArrayFiller.sortedList(size);
 
-
+            System.gc();
+            System.out.printf("%10d",size);
             results[i] = Benchmark.linearBenchDuplicate(firstArray, secondArray, rounds);
-            results[i + arraySizes.length] = Benchmark.binaryBenchDuplicate(firstArray, secondArray, rounds);
-            System.out.printf("%10d %15.2f %15.2f\n", size,  results[i], results[i + arraySizes.length]);
+            results[i + listLength] = Benchmark.binaryBenchDuplicate(firstArray, secondArray, rounds);
+            results[i + (listLength*2)] = Benchmark.pointerBenchDuplicate(firstArray, secondArray, rounds);
+            System.out.println();
         }
-        double avgRatioLinear= 0,avgRatioBinary =0;
-        for(int i = 1; i < arraySizes.length; i++){
+        double avgRatioLinear= 0,avgRatioBinary =0, avgRatioPointer =0;
+        for(int i = 1; i < listLength; i++){
             avgRatioLinear += results[i]/results[i-1];
-            avgRatioBinary += results[i+ arraySizes.length]/results[i+arraySizes.length -1];
+            avgRatioBinary += results[i+ listLength]/results[i+listLength -1];
+            avgRatioPointer += results[i+ listLength*2]/results[i+listLength*2 -1];
+
         }
-        System.out.printf("Average growth ratio for linear: %.2f\n",avgRatioLinear/(arraySizes.length-1));
-        System.out.printf("Average growth ratio for linear: %.2f\n",avgRatioBinary/(arraySizes.length-1));
+        System.out.printf("Average growth ratio for linear: %.2f\n",avgRatioLinear/(listLength-1));
+        System.out.printf("Average growth ratio for binary: %.2f\n",avgRatioBinary/(listLength-1));
+        System.out.printf("Average growth ratio for pointer: %.2f\n",avgRatioPointer/(listLength-1));
     }
 
 

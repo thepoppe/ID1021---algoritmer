@@ -22,5 +22,21 @@ public class Search {
         }
         return false;
     }
+    public static int fasterSearch(int[] list1, int[]list2 ){
+        int i =0,j=0,duplicates = 0;
+        while ( i < list1.length && j < list2.length){
+            if (list1[i]> list2[j])
+                j++;
+            else if (list1[i] == list2[j]) {
+                duplicates++;
+                i++;
+                j++;
+            }
+            else j++;
+        }
+        return duplicates;
+    }
+
+
 
 }

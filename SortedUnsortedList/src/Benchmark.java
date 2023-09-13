@@ -79,6 +79,7 @@ public class Benchmark {
 
 
     public static double binaryBenchDuplicate(int[] firstArray, int[] secondArray, int rounds) {
+
         double minTime = Double.POSITIVE_INFINITY;
         for (int i = 0; i < rounds; i++) {
 
@@ -95,13 +96,15 @@ public class Benchmark {
             }
 
         }
+        System.out.printf("%15.2f",minTime);
         return minTime;
 
 
     }
     public static double linearBenchDuplicate(int[] firstArray, int[] secondArray,  int rounds) {
+
         double minTime = Double.POSITIVE_INFINITY;
-        for (int i = 0; i < rounds; i++) {
+        for (int i = 0; i < rounds/10; i++) {
 
             double t0 = System.nanoTime();
             for (int currentElement : firstArray) {
@@ -115,6 +118,29 @@ public class Benchmark {
             }
 
         }
+        System.out.printf("%15.2f",minTime);
+        return minTime ;
+
+
+    }
+    public static double pointerBenchDuplicate(int[] firstArray, int[] secondArray,  int rounds) {
+
+        double minTime = Double.POSITIVE_INFINITY;
+        for (int i = 0; i < rounds; i++) {
+
+            double t0 = System.nanoTime();
+
+            Search.fasterSearch(firstArray, secondArray);
+
+            double t1 = System.nanoTime();
+            double time = t1 - t0;
+
+            if (time < minTime) {
+                minTime = time;
+            }
+
+        }
+        System.out.printf("%15.2f",minTime);
         return minTime ;
 
 
