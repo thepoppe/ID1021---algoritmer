@@ -3,8 +3,10 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/Arrays/Arrays.iml" filepath="$PROJECT_DIR$/Arrays/Arrays.iml" />
+      <module fileurl="file://$PROJECT_DIR$/CardTEst/CardTEst.iml" filepath="$PROJECT_DIR$/CardTEst/CardTEst.iml" />
       <module fileurl="file://$PROJECT_DIR$/Hp-35/Hp-35.iml" filepath="$PROJECT_DIR$/Hp-35/Hp-35.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/ID1021---algoritmer.iml" filepath="$PROJECT_DIR$/.idea/ID1021---algoritmer.iml" />
+      <module fileurl="file://$PROJECT_DIR$/LinkedList/LinkedList.iml" filepath="$PROJECT_DIR$/LinkedList/LinkedList.iml" />
       <module fileurl="file://$PROJECT_DIR$/SortedUnsortedList/SortedUnsortedList.iml" filepath="$PROJECT_DIR$/SortedUnsortedList/SortedUnsortedList.iml" />
       <module fileurl="file://$PROJECT_DIR$/Sorting/Sorting.iml" filepath="$PROJECT_DIR$/Sorting/Sorting.iml" />
     </modules>
