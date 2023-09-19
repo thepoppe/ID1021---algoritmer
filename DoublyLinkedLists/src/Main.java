@@ -1,14 +1,15 @@
 public class Main {
 
     public static void main(String[] args) {
-        for (int i = 0; i < 10; i++)
+        testDoublyLinkedLists();
+        testUnlinkInsert();
+        for (int i = 0; i < 1; i++)
             Bench.run();
     }
 
 
     private static void testDoublyLinkedLists(){
         DoublyLinked firstList = new DoublyLinked(5);
-        DoublyLinked secondList = new DoublyLinked(10);
         System.out.println("length of first: \n"+firstList.length());
         System.out.println("find element 2: \n"+firstList.find(2));
         System.out.println("Print List1: ");
