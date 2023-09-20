@@ -45,24 +45,16 @@ public class DoublyLinked implements LinkedLists {
 
 
 
-    void add(int item){
-        if (first == null){
-            first = new Cell(item,null,null);
-        }
-        else{
-            Cell nextCell = new Cell(item,first, null );
-           first = nextCell;
-        }
-    }
+    void add(int item){first = new Cell(item,first, null );}
 
     int length(){
         if (first == null)
             return 0;
-        Cell nextCell = first;
+        Cell currentCell = first;
         int size =0;
-        while (nextCell != null){
+        while (currentCell != null){
             size++;
-            nextCell = nextCell.next;
+            currentCell = currentCell.next;
         }
         return size;
     }
@@ -70,11 +62,11 @@ public class DoublyLinked implements LinkedLists {
     boolean find(int item){
         if (first == null)
             return false;
-        Cell nextCell = first;
-        while (nextCell!=null){
-            if (nextCell.head == item)
+        Cell currentCell = first;
+        while (currentCell!=null){
+            if (currentCell.head == item)
                 return true;
-            else nextCell = nextCell.next;
+            else currentCell = currentCell.next;
         }
         return false;
     }
@@ -86,12 +78,12 @@ public class DoublyLinked implements LinkedLists {
         }
         else
         {
-            Cell nextCell = first;
-            while ( nextCell.next != null){
-                nextCell = nextCell.next;
-                if ( nextCell.head == item){
-                    nextCell.prev.next = nextCell.next;
-                    nextCell.next.prev = nextCell.prev;
+            Cell currentCell = first;
+            while ( currentCell.next != null){
+                currentCell = currentCell.next;
+                if ( currentCell.head == item){
+                    currentCell.prev.next = currentCell.next;
+                    currentCell.next.prev = currentCell.prev;
                     break;
                 }
 

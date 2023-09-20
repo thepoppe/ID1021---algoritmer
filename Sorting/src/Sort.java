@@ -108,6 +108,14 @@ public class Sort {
         quickSort(originalArray,0, originalArray.length -1);
     }
 
+
+    /*
+        if (mid!=min)
+            quickSort(org,firstIndex,pivotPosition-1);
+        if (mid!=max)
+            quickSort(org,pivotPosition+1,lastIndex);
+     */
+
     private static void quickSort(int[] org,  int firstIndex, int lastIndex) {
         if( firstIndex < lastIndex){
             int pivotPosition = partition(org,firstIndex,lastIndex);
@@ -132,6 +140,23 @@ public class Sort {
         swap(org,firstIndex,i-1);
 
         return i-1;
+
+    }
+    private static int partitionLecture(int[] org,  int firstIndex, int lastIndex) {
+
+        int pivot = org[firstIndex];
+        int i = firstIndex, j = lastIndex;
+        while(i!=j){
+            while (org[j] > pivot && j>i) {
+                j--;
+            }
+            while (org[i] <= pivot && i<j){
+                i++;
+            }
+            swap(org,firstIndex,j);
+        }
+
+        return j;
 
     }
 

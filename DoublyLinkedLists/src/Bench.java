@@ -48,9 +48,14 @@ cell and then add it to beginning of the list.
 
                 }
                 t1 = System.nanoTime();
-                if (timeDoub > (t1-t0))
-                    timeDoub = (t1-t0);
+                if (timeDoub > (t1-t0)/ks.length)
+                    timeDoub = (t1-t0)/ks.length;
+            }
 
+            System.out.printf("Size: %d\tTime for Doubly Linked : %.1f\n",size,timeDoub);
+
+
+            for (int i = 0; i <1000; i++){
                 t0 =System.nanoTime();
                 for (int k: ks){
                     list2.unlink(listOfLinked[k]);
@@ -58,13 +63,11 @@ cell and then add it to beginning of the list.
 
                 }
                 t1 = System.nanoTime();
-                if (timeSin > (t1-t0))
-                    timeSin = (t1-t0);
+                if (timeSin > (t1-t0)/ks.length)
+                    timeSin = (t1-t0)/ks.length;
             }
 
-
-            System.out.printf("Size: %d\tTime for Doubly Linked : %.1f\n",size,timeDoub/1000);
-            System.out.printf("Size: %d\tTime for Single Linked : %.1f\n",size,timeSin/1000);
+            System.out.printf("Size: %d\tTime for Single Linked : %.1f\n",size,timeSin);
 
 
 

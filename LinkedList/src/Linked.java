@@ -83,6 +83,7 @@ public class Linked implements LinkedLists {
         }
     }
 
+
     void remove2(int item){
         if (first == null)
             throw new IllegalArgumentException("List is empty");

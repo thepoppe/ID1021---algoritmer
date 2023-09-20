@@ -1,6 +1,8 @@
 import java.util.Arrays;
 
-public class Bench {
+public class
+
+Bench {
 
 
 
@@ -174,12 +176,15 @@ public class Bench {
         System.out.println("Append: fixed a, dynamic b");
         System.out.printf("%10s%15s%15s\n","Size","Linked", "Array");
         for (int size: sizesFirst) {
+
+            firstArray = fillArray(5000);
+            secondArray = fillArray(size);
+            //100 rounds warmup
             for (int i = 0; i < 100; i++) {
                 firstList = new Linked(5000);
                 secondList = new Linked(size);
                 firstList.append(secondList);
-                firstArray = fillArray(5000);
-                secondArray = fillArray(size);
+
                 append(firstArray,secondArray);
             }
 
@@ -204,8 +209,6 @@ public class Bench {
             minTime = Double.POSITIVE_INFINITY;
             for (int i = 0; i < rounds; i++) {
                 double time = 0.000;
-                firstArray = fillArray(5000);
-                secondArray = fillArray(size);
                 double t0 = System.nanoTime();
                 append(firstArray,secondArray);
                 double t1 = System.nanoTime();
