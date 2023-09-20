@@ -1,7 +1,5 @@
-public class Linked implements LinkedLists {
+public class SinglyLinked implements LinkedLists {
     Cell first;
-
-
 
 
     public void insert(Cell cellToInsert){
@@ -30,8 +28,8 @@ public class Linked implements LinkedLists {
         if (first == null)
             first = new Cell(item, null);
         else {
-            Cell nextCell = new Cell(item,first);
-            first = nextCell;
+            Cell currentCell = new Cell(item,first);
+            first = currentCell;
         }
     }
 
@@ -39,10 +37,10 @@ public class Linked implements LinkedLists {
         int size = 0;
         if (first == null)
             return size;
-        Cell nextCell = first;
-        while (nextCell != null){
+        Cell currentCell = first;
+        while (currentCell != null){
             size++;
-            nextCell = nextCell.next;
+            currentCell = currentCell.next;
         }
         return size;
     }
@@ -50,11 +48,11 @@ public class Linked implements LinkedLists {
     boolean find(int item){
         if (first == null)
             throw new IllegalArgumentException("No elements in the list");
-        Cell nextCell = first;
-        while (nextCell!=null){
-            if(nextCell.head == item)
+        Cell currentCell = first;
+        while (currentCell!=null){
+            if(currentCell.head == item)
                 return true;
-            nextCell = nextCell.next;
+            currentCell = currentCell.next;
         }
         return false;
     }
@@ -67,19 +65,19 @@ public class Linked implements LinkedLists {
             first = first.next;
 
         else {
-            Cell nextCell = first;
+            Cell currentCell = first;
             boolean found = false;
-            while (nextCell.next != null) {
-                if (nextCell.next.head == item) {
+            while (currentCell.next != null) {
+                if (currentCell.next.head == item) {
                     found = true;
                     break;
                 }
-                nextCell = nextCell.next;
+                currentCell = currentCell.next;
             }
             if (!found)
                 throw new IllegalArgumentException("No such element in the list");
 
-            nextCell.next = nextCell.next.next;
+            currentCell.next = currentCell.next.next;
         }
     }
 
@@ -91,11 +89,11 @@ public class Linked implements LinkedLists {
             first = first.next;
 
         else {
-            Cell nextCell = first;
+            Cell currentCell = first;
             Cell prevCell = null;
-            while (nextCell.next != null) {
-                prevCell =nextCell;
-                nextCell = nextCell.next;
+            while (currentCell.next != null) {
+                prevCell =currentCell;
+                currentCell = currentCell.next;
             }
             if (prevCell != null) {
                 prevCell.next = null;
@@ -104,20 +102,22 @@ public class Linked implements LinkedLists {
     }
 
 
-    public void append(Linked secondList) {
+    public void append(SinglyLinked secondList) {
         if (this.first == null)
             this.first = secondList.first;
         else if (secondList.first != null) {
-            Cell next = this.first;
+            Cell currentCell = this.first;
             Cell prev = null;
-            while (next != null) {
-                prev = next;
-                next = next.next;
+            while (currentCell != null) {
+                prev = currentCell;
+                currentCell = currentCell.next;
             }
             prev.next = secondList.first;
             secondList.first = null;
         }
     }
+
+
     public void printAllItems(){
         if(first !=null){
             if (first.next==null)
@@ -141,20 +141,20 @@ public class Linked implements LinkedLists {
             first = null;
         }
         else {
-            Cell nextCell = first;
+            Cell currentCell = first;
             Cell prevCell = null;
-            while (nextCell.next != null) {
-                prevCell = nextCell;
-                nextCell = nextCell.next;
+            while (currentCell.next != null) {
+                prevCell = currentCell;
+                currentCell = currentCell.next;
             }
-            value = nextCell.head;
+            value = currentCell.head;
             prevCell.next = null;
         }
 
         return value;
     }
 
-    Linked(int n) {
+    SinglyLinked(int n) {
         Cell last = null;
         for (int i = 0; i < n; i++) {
             last = new Cell(i, last);

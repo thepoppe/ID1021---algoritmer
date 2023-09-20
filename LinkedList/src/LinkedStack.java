@@ -1,9 +1,9 @@
 public class LinkedStack {
 
-    private final Linked list;
+    private final SinglyLinked list;
 
     public LinkedStack() {
-        list= new Linked(0);
+        list= new SinglyLinked(0);
     }
 
 

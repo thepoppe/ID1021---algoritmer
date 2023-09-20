@@ -3,9 +3,7 @@ public class DoublyLinked implements LinkedLists {
 
 
     DoublyLinked(int n) {
-
-        Cell last = null;
-        Cell trailingLast;
+        Cell last = null,trailingLast;
         for (int i = 0; i < n; i++) {
             trailingLast = last;
             last = new Cell(i, last, null);
@@ -26,9 +24,10 @@ public class DoublyLinked implements LinkedLists {
 
         else if (cellToInsert != null){
             first.prev = cellToInsert;
+            cellToInsert.prev = null;
             cellToInsert.next = first;
             first = cellToInsert;
-            first.prev = null;
+
         }
     }
 
@@ -36,9 +35,8 @@ public class DoublyLinked implements LinkedLists {
         if (cellToUnlink == first)
             first = first.next;
         else if (cellToUnlink != null) {
-            Cell prev = cellToUnlink.prev;
-            Cell next = cellToUnlink.next;
-            prev.next = next;
+            cellToUnlink.prev.next = cellToUnlink.next;
+            cellToUnlink.next.prev = cellToUnlink.prev;
         }
 
     }

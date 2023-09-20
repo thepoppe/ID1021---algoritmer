@@ -1,9 +1,8 @@
 public class Main {
 
     public static void main(String[] args) {
-        testDoublyLinkedLists();
-        testUnlinkInsert();
-        for (int i = 0; i < 1; i++)
+
+        for (int i = 0; i < 4; i++)
             Bench.run();
     }
 
@@ -31,7 +30,7 @@ public class Main {
     private static void testUnlinkInsert(){
         System.out.println("Fill the lists: ");
         DoublyLinked firstList = new DoublyLinked(10);
-        Linked secondList = new Linked(10);
+        SinglyLinked secondList = new SinglyLinked(10);
         firstList.printAllItems();
         secondList.printAllItems();
         System.out.println("unlink third cell: ");

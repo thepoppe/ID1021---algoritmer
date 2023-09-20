@@ -8,8 +8,8 @@ Bench {
 
 
     public static void firstTest(){
-        Linked firstList = new Linked(5);
-        Linked secondList = new Linked(10);
+        SinglyLinked firstList = new SinglyLinked(5);
+        SinglyLinked secondList = new SinglyLinked(10);
         System.out.println("length of first: \n"+firstList.length());
         System.out.println("find element 2: \n"+firstList.find(2));
         System.out.println("Print List1: ");
@@ -36,8 +36,8 @@ Bench {
         System.out.printf("%10s%15s\n","Size","Append");
         for (int size: sizesFirst) {
             for (int i = 0; i < 100; i++) {
-                firstList = new Linked(size);
-                secondList = new Linked(5000);
+                firstList = new SinglyLinked(size);
+                secondList = new SinglyLinked(5000);
                 firstList.append(secondList);
             }
 
@@ -45,8 +45,8 @@ Bench {
             double minTime = Double.POSITIVE_INFINITY;
             for (int i = 0; i < rounds; i++) {
                 double time = 0.000;
-                firstList = new Linked(size);
-                secondList = new Linked(5000);
+                firstList = new SinglyLinked(size);
+                secondList = new SinglyLinked(5000);
                 double t0 = System.nanoTime();
                 firstList.append(secondList);
                 double t1 = System.nanoTime();
@@ -65,7 +65,7 @@ Bench {
 
 
     public static void secondTest(){
-        Linked firstList,secondList;
+        SinglyLinked firstList,secondList;
         int[] sizesFirst = {5000,10000,20000,40000,80000,160000};
         int rounds = 1000;
 
@@ -74,8 +74,8 @@ Bench {
         System.out.printf("%10s%15s\n","Size","Append");
         for (int size: sizesFirst) {
             for (int i = 0; i < 100; i++) {
-                firstList = new Linked(5000);
-                secondList = new Linked(size);
+                firstList = new SinglyLinked(5000);
+                secondList = new SinglyLinked(size);
                 firstList.append(secondList);
             }
 
@@ -83,8 +83,8 @@ Bench {
             double minTime = Double.POSITIVE_INFINITY;
             for (int i = 0; i < rounds; i++) {
                 double time = 0.000;
-                firstList = new Linked(5000);
-                secondList = new Linked(size);
+                firstList = new SinglyLinked(5000);
+                secondList = new SinglyLinked(size);
                 double t0 = System.nanoTime();
                 firstList.append(secondList);
                 double t1 = System.nanoTime();
@@ -102,7 +102,7 @@ Bench {
     }
 
     public static void thirdTest(){
-        Linked firstList,secondList;
+        SinglyLinked firstList,secondList;
         int[] firstArray = fillArray(10),secondArray = fillArray(10);
         System.out.println(Arrays.toString(firstArray));
         System.out.println(Arrays.toString(secondArray));
@@ -113,11 +113,11 @@ Bench {
 
 
         System.out.println("Append: dynamic a, fixed b");
-        System.out.printf("%10s%15s%15s\n","Size","Linked", "Array");
+        System.out.printf("%10s%15s%15s\n","Size","SinglyLinked", "Array");
         for (int size: sizesFirst) {
             for (int i = 0; i < 100; i++) {
-                firstList = new Linked(5000);
-                secondList = new Linked(size);
+                firstList = new SinglyLinked(5000);
+                secondList = new SinglyLinked(size);
                 firstList.append(secondList);
                 firstArray = fillArray(size);
                 secondArray = fillArray(5000);
@@ -128,8 +128,8 @@ Bench {
             double minTime = Double.POSITIVE_INFINITY;
             for (int i = 0; i < rounds; i++) {
                 double time = 0.000;
-                firstList = new Linked(size);
-                secondList = new Linked(5000);
+                firstList = new SinglyLinked(size);
+                secondList = new SinglyLinked(5000);
                 double t0 = System.nanoTime();
                 firstList.append(secondList);
                 double t1 = System.nanoTime();
@@ -165,7 +165,7 @@ Bench {
 
 
     public static void fourthTest(){
-        Linked firstList,secondList;
+        SinglyLinked firstList,secondList;
         int[] firstArray,secondArray;
 
 
@@ -174,15 +174,15 @@ Bench {
 
 
         System.out.println("Append: fixed a, dynamic b");
-        System.out.printf("%10s%15s%15s\n","Size","Linked", "Array");
+        System.out.printf("%10s%15s%15s\n","Size","SinglyLinked", "Array");
         for (int size: sizesFirst) {
 
             firstArray = fillArray(5000);
             secondArray = fillArray(size);
             //100 rounds warmup
             for (int i = 0; i < 100; i++) {
-                firstList = new Linked(5000);
-                secondList = new Linked(size);
+                firstList = new SinglyLinked(5000);
+                secondList = new SinglyLinked(size);
                 firstList.append(secondList);
 
                 append(firstArray,secondArray);
@@ -192,8 +192,8 @@ Bench {
             double minTime = Double.POSITIVE_INFINITY;
             for (int i = 0; i < rounds; i++) {
                 double time = 0.000;
-                firstList = new Linked(5000);
-                secondList = new Linked(size);
+                firstList = new SinglyLinked(5000);
+                secondList = new SinglyLinked(size);
                 double t0 = System.nanoTime();
                 firstList.append(secondList);
                 double t1 = System.nanoTime();
@@ -233,7 +233,7 @@ Bench {
 
 
     public static void allocationCost(){
-        Linked firstList;
+        SinglyLinked firstList;
         int[] firstArray;
 
 
@@ -242,10 +242,10 @@ Bench {
 
 
         System.out.println("Time to allocate:");
-        System.out.printf("%10s%15s%15s\n","Size","Linked", "Array");
+        System.out.printf("%10s%15s%15s\n","Size","SinglyLinked", "Array");
         for (int size: sizesFirst) {
             for (int i = 0; i < 100; i++) {
-                firstList = new Linked(size);
+                firstList = new SinglyLinked(size);
                 firstArray = fillArray(size);
             }
 
@@ -254,7 +254,7 @@ Bench {
             for (int i = 0; i < rounds; i++) {
                 double time = 0.000;
                 double t0 = System.nanoTime();
-                firstList = new Linked(size);
+                firstList = new SinglyLinked(size);
                 double t1 = System.nanoTime();
                 time = t1 - t0 ;
 

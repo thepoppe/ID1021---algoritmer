@@ -21,25 +21,27 @@ cell and then add it to beginning of the list.
 
 
     static void run(){
+        System.out.printf("\n%10s%20s%20s","Size","Doubly","Singly");
         int[] sizes = {1000,2000,4000,8000};
         for (int size : sizes){
 
             LinkedLists list1 =  new DoublyLinked(0);
-            Cell[] listOfDoubly = setUpList(list1,size);
-            LinkedLists list2 = new Linked(0);
-            Cell[] listOfLinked = setUpList(list2,size);
+            Cell[] listOfDoubly = setUpLists(list1,size);
+            LinkedLists list2 = new SinglyLinked(0);
+            Cell[] listOfLinked = setUpLists(list2,size);
             int[] ks = fillToN(size);
 
-            System.out.println("Warm Up...");
-            LinkedLists list3 =  new Linked(0);
-            Cell[] listOf3 = setUpList(list3,size);
+
+            LinkedLists list3 =  new SinglyLinked(0);
+            Cell[] listOf3 = setUpLists(list3,size);
             for(Cell cell : listOf3){
                 list3.unlink(cell);
                 list3.insert(cell);
             }
 
-            System.out.print("Benchmark starts...\n");
-            double t0,t1,timeDoub = Double.POSITIVE_INFINITY,timeSin = Double.POSITIVE_INFINITY;
+            System.gc();
+            System.out.printf("\n%10d",size);
+            double t0= 0.00,t1=.00,timeDoub = Double.POSITIVE_INFINITY,timeSin = Double.POSITIVE_INFINITY;
             for (int i = 0; i <1000; i++){
                 t0 =System.nanoTime();
                 for (int k: ks){
@@ -52,7 +54,7 @@ cell and then add it to beginning of the list.
                     timeDoub = (t1-t0)/ks.length;
             }
 
-            System.out.printf("Size: %d\tTime for Doubly Linked : %.1f\n",size,timeDoub);
+            System.out.printf("%20.1f",timeDoub);
 
 
             for (int i = 0; i <1000; i++){
@@ -67,7 +69,9 @@ cell and then add it to beginning of the list.
                     timeSin = (t1-t0)/ks.length;
             }
 
-            System.out.printf("Size: %d\tTime for Single Linked : %.1f\n",size,timeSin);
+
+            System.out.printf("%20.1f",timeSin);
+
 
 
 
@@ -83,7 +87,7 @@ cell and then add it to beginning of the list.
         return newInt;
     }
 
-    private static Cell[] setUpList ( LinkedLists list, int size){
+    private static Cell[] setUpLists(LinkedLists list, int size){
         Random random = new Random();
         Cell[] listOfDoubly = new Cell[size];
         for (int i = listOfDoubly.length-1  ; i >= 0; i--){
