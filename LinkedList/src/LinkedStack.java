@@ -13,6 +13,6 @@ public class LinkedStack {
     }
 
     public int pop(){
-        return list.getLastElement();
+        return list.getFirstElement();
     }
 }

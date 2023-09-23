@@ -32,9 +32,14 @@ public class DoublyLinked implements LinkedLists {
     }
 
     public void unlink(Cell cellToUnlink){
+        if (cellToUnlink == null)
+            throw new IllegalArgumentException("The cell to unlink is null");
         if (cellToUnlink == first)
             first = first.next;
-        else if (cellToUnlink != null) {
+        else if (cellToUnlink.next == null)
+            cellToUnlink.prev.next = null;
+
+        else{
             cellToUnlink.prev.next = cellToUnlink.next;
             cellToUnlink.next.prev = cellToUnlink.prev;
         }

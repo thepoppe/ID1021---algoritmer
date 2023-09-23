@@ -1,7 +1,8 @@
 public class Main {
 
     public static void main(String[] args) {
-
+        Bench.firstTest();
+        Bench.secondTest();
 
         LinkedStack stack = new LinkedStack();
         stack.push(5);

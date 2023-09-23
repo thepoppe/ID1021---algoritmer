@@ -66,18 +66,15 @@ public class SinglyLinked implements LinkedLists {
 
         else {
             Cell currentCell = first;
-            boolean found = false;
             while (currentCell.next != null) {
                 if (currentCell.next.head == item) {
-                    found = true;
-                    break;
+                    currentCell.next = currentCell.next.next;
+                    return;
                 }
                 currentCell = currentCell.next;
             }
-            if (!found)
-                throw new IllegalArgumentException("No such element in the list");
 
-            currentCell.next = currentCell.next.next;
+
         }
     }
 
@@ -131,26 +128,12 @@ public class SinglyLinked implements LinkedLists {
         }
     }
 
-    public int getLastElement() {
+    public int getFirstElement() {
         if (first == null)
             throw new IllegalArgumentException("The list is empty");
 
-        int value;
-        if ( first.next == null){
-            value = first.head;
-            first = null;
-        }
-        else {
-            Cell currentCell = first;
-            Cell prevCell = null;
-            while (currentCell.next != null) {
-                prevCell = currentCell;
-                currentCell = currentCell.next;
-            }
-            value = currentCell.head;
-            prevCell.next = null;
-        }
-
+        int value = first.head;
+        first = first.next;
         return value;
     }
 

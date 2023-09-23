@@ -22,7 +22,7 @@ cell and then add it to beginning of the list.
 
     static void run(){
         System.out.printf("\n%10s%20s%20s","Size","Doubly","Singly");
-        int[] sizes = {1000,2000,4000,8000};
+        int[] sizes = {100000};
         for (int size : sizes){
 
             LinkedLists list1 =  new DoublyLinked(0);
@@ -31,18 +31,18 @@ cell and then add it to beginning of the list.
             Cell[] listOfLinked = setUpLists(list2,size);
             int[] ks = fillToN(size);
 
-
-            LinkedLists list3 =  new SinglyLinked(0);
+            System.gc();
+            LinkedLists list3 =  new DoublyLinked(0);
             Cell[] listOf3 = setUpLists(list3,size);
             for(Cell cell : listOf3){
                 list3.unlink(cell);
                 list3.insert(cell);
             }
 
-            System.gc();
+
             System.out.printf("\n%10d",size);
             double t0= 0.00,t1=.00,timeDoub = Double.POSITIVE_INFINITY,timeSin = Double.POSITIVE_INFINITY;
-            for (int i = 0; i <1000; i++){
+            for (int i = 0; i <10000; i++){
                 t0 =System.nanoTime();
                 for (int k: ks){
                     list1.unlink(listOfDoubly[k]);
@@ -90,7 +90,7 @@ cell and then add it to beginning of the list.
     private static Cell[] setUpLists(LinkedLists list, int size){
         Random random = new Random();
         Cell[] listOfDoubly = new Cell[size];
-        for (int i = listOfDoubly.length-1  ; i >= 0; i--){
+        for (int i = 0 ; i <size; i++){
             int randomValue = random.nextInt(size*2);
             listOfDoubly[i] = new Cell(randomValue,null,null);
             list.insert(listOfDoubly[i] );

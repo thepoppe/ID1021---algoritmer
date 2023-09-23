@@ -9,11 +9,12 @@ public class Main {
 
 
         int[] arraySize = {100,200,400,800,1600};
-        int[] arraySizes2 = {100,200,400,800,1600,3600,6400,6400*2};
-        int rounds = 10000;
+        int[] arraySizes2 = {50,100,200,400,800,1600,3600,6400,6400*2,6400*2*2};
+        int rounds = 1000;
 
         System.out.println("First test selection vs insertion");
-        Bench.firstBench(arraySize,rounds);
+        //Bench.firstBench(arraySize,rounds);
+        Bench.firstBench(arraySizes2,rounds);
         /*System.out.println("Second test selection, insertion, merge");
         Bench.secondBench(arraySize,rounds);
         System.out.println("Third test merge and quick sort");
