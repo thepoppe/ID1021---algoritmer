@@ -23,6 +23,9 @@ public class DynamicStack extends Stack{
 
         return stack[stackPointer--];
     }
+    public boolean isEmpty(){
+        return (stackPointer < 0) ? true : false;
+    }
 
     private void increaseStackSizeBy2x() {
         int[] newStack = new int[(int) (stack.length * 2)];

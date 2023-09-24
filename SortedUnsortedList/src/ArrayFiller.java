@@ -19,7 +19,6 @@ public class ArrayFiller {
             nextValue += random.nextInt(10);
             createdList[i] = nextValue + 1;
         }
-        System.out.println(nextValue);
         return createdList;
     }
 

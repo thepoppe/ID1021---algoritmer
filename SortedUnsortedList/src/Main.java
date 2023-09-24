@@ -1,7 +1,47 @@
+import java.util.Random;
+
 public class Main {
     public static void main(String[] args) {
-        duplicateFirstTest();
+        testForTrees();
 
+    }
+    public static void testForTrees(){
+        int[] sizes = {500,1000,2000,4000,8000,16000};
+        int round = 10000;
+        double minTime,t0,t1,time;
+        for (int s : sizes) {
+            int[] sortedArray = ArrayFiller.sortedList(s);
+            int[] k = fillKeys(s);
+
+            minTime = Double.POSITIVE_INFINITY;
+            //Warmup
+            for (int key : k) {
+                Search.binarySearch(sortedArray,key);
+            }
+            //Test starts
+            for (int i = 0; i < round; i++) {
+                t0 = System.nanoTime();
+                for (int key : k)
+                    Search.binarySearch(sortedArray,key);
+                t1 = System.nanoTime();
+                time = (t1 - t0) / s;
+
+                if (time < minTime)
+                    minTime = time;
+            }
+
+            System.out.printf("%10d%15.1f\n" ,s, minTime );
+        }
+
+
+    }
+
+    private static int[] fillKeys(int s) {
+        int[] keys = new int[s];
+        Random random = new Random();
+        for(int i = 0; i < s; i++)
+            keys[i] = random.nextInt(s);
+        return keys;
     }
 
     private static void firstTest(){
