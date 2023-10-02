@@ -1,3 +1,4 @@
+
 import java.util.Iterator;
 import java.util.Objects;
 
@@ -7,7 +8,7 @@ public class BinaryTree implements Iterable<Integer> {
         return new TreeIterator(this.root);
     }
 
-     class Node {
+    public class Node {
         Integer key;
         Integer value;
         Node left;
@@ -27,7 +28,7 @@ public class BinaryTree implements Iterable<Integer> {
                 right.print();
         }
 
-        Integer lookupInternal(Integer searchKey) {
+        private Integer lookupInternal(Integer searchKey) {
             if (searchKey == key)
                 return value;
             else if (searchKey < key) {
@@ -96,14 +97,6 @@ public class BinaryTree implements Iterable<Integer> {
         else
             return lookupHelperImproved(node.right,key);
     }
-
-
-
-
-
-
-
-
 
 
 }

@@ -1,13 +1,13 @@
 import java.util.Iterator;
-import java.util.Stack;
+
 
 public class TreeIterator implements Iterator<Integer>{
     private BinaryTree.Node next;
-    private Stack<BinaryTree.Node> stack;
+    private final GenericStack<BinaryTree.Node> stack;
 
     public TreeIterator(BinaryTree.Node root){
         this.next = root;
-        this.stack = new Stack<>();
+        this.stack = new GenericStack<>();
     }
 
     @Override
@@ -19,7 +19,7 @@ public class TreeIterator implements Iterator<Integer>{
     public Integer next() {
         if (!hasNext()) // the stack needs to be checked to traverse back up
             return null;
-        while (next!=null){
+        while (next.left!=null){
             stack.push(next);
             next = next.left;
         }

@@ -70,7 +70,7 @@ public class Main {
                 for (int key : listOfKeys)
                     tree.lookup(key);
                 t1 = System.nanoTime();
-                time = (t1 - t0) / size;
+                time = (t1 - t0) / listOfKeys.length;
 
                 if (time < minTime)
                     minTime = time;
