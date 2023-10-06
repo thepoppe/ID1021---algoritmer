@@ -83,4 +83,9 @@ public class SecondQueue {
         last = capacity;
         this.capacity *=2;
     }
+
+    public void clear() {
+        this.array = null;
+        this.array = new Integer[4];
+    }
 }

@@ -5,7 +5,7 @@ public class Main {
     public static void main(String[] args) {
         int[] sizes = {500,1000,2000,4000,8000,16000};
         int  rounds = 10000;
-        functionalityTestIterator();
+        functionalityPrintLargeTree();
     }
 
 
@@ -26,6 +26,10 @@ public class Main {
         tree.root.print();
     }
 
+    private static void functionalityPrintLargeTree(){
+        BinaryTree tree = setUpTree(100);
+        tree.root.print();
+    }
 
     private static void functionalityTestBST(){
         BinaryTree tree = new BinaryTree();

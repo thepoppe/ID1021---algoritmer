@@ -84,11 +84,14 @@ public class LinkedList {
                 greater.insert(iteratingNode);
             }
         }
+
         if(lesser.last != null)
             lesser.last.next =null;
         if(greater.last != null)
             greater.last.next =null;
+
     }
+
 
 
 

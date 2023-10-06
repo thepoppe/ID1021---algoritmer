@@ -2,6 +2,12 @@ public class FirstQueue {
 
     private Node head;
     private Node tail;
+
+    public void clear() {
+        this.head = null;
+        this.tail = null;
+    }
+
     private class Node {
         Integer item;
         Node next;

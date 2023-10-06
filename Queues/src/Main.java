@@ -2,8 +2,25 @@ public class Main {
 
     public static void main(String[] args) {
 
-        functionalityArrayQueueDynamicModulo();
+      test();}
+
+    private static void test(){
+        int[] sizes = {1000,2000,4000,8000,16000,32000};
+        int rounds  =1000;
+        for ( int size : sizes) {
+            Bench first = new Bench(size, rounds);
+            Bench warmup = new Bench(size, rounds);
+
+            warmup.benchArray();
+            warmup.benchList();
+
+            double b0 = first.benchArray();
+            double b1 = first.benchList();
+            System.out.printf("%10d%15.1f%15.1f\n",size,b0,b1);
+        }
     }
+
+
 
     private static void functionalityArrayQueueDynamicModulo() {
         SecondQueue queue = new SecondQueue();

@@ -101,7 +101,7 @@ public class Main {
             int[] sortedArray = ArrayFiller.sortedList(size);
             int[] keys = ArrayFiller.keyFiller(numberOfKeys,size);
 
-            double linearMinTime = Benchmark.linearBenchWithKeys(sortedArray,keys, rounds);
+           // double linearMinTime = Benchmark.linearBenchWithKeys(sortedArray,keys, rounds);
             double binaryMinTime = Benchmark.binaryBenchWithKeys(sortedArray,keys, rounds);
             System.out.printf("%10d %15.2f %15.2f\n",size, linearMinTime,binaryMinTime);
         }

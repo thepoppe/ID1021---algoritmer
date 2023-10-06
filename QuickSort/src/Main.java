@@ -4,7 +4,9 @@ public class Main {
     public static void main(String[] args) {
 
 
-        bench();
+        functionalityLinkedFromLesson();
+
+
     }
 
     private static void bench(){
@@ -28,6 +30,21 @@ public class Main {
             //System.out.printf("%10d%10d%15.1f%15.1f\n",2,size,b2,b3);
 
         }
+    }
+    private static void functionalityLinked3() {
+        LinkedList list =new LinkedList();
+        list.add(2);
+        list.add(8);
+        list.add(4);
+        list.add(7);
+        list.add(1);
+        list.add(3);
+        list.add(9);
+        list.add(6);
+        list.add(5);
+        list.printAll();
+        list.quicksort();
+        list.printAll();
     }
 
     private static void functionalityLinked2() {
@@ -132,6 +149,89 @@ public class Main {
         System.out.println("Original list:");
         list.printAll();
         list.quicksort();
+        System.out.println("Sorted list:");
+        list.printAll();
+        System.out.println();
+
+    }
+    private static void functionalityLinkedFromLesson(){
+
+        QuickList<Integer> list = new QuickList<>();
+        // Edge case 1: An empty list
+        System.out.println("Edge Case 1: Empty List");
+        System.out.println("Original list:");
+        list.printAll();
+        list.sort();
+        System.out.println("Sorted list:");
+        list.printAll();
+        System.out.println();
+        // Edge case 2: A list with a single element
+        System.out.println("Edge Case 2: List with a Single Element");
+        list.add(42);
+        System.out.println("Original list:");
+        list.printAll();
+        list.sort();
+        System.out.println("Sorted list:");
+        list.printAll();
+        System.out.println();
+        // Edge case 3: A list with duplicate elements
+        System.out.println("Edge Case 3: List with Duplicate Elements");
+        list.clear();
+        list.add(5);
+        list.add(3);
+        list.add(5);
+        list.add(2);
+        list.add(3);
+        list.add(2);
+        System.out.println("Original list:");
+        list.printAll();
+        list.sort();
+        System.out.println("Sorted list:");
+        list.printAll();
+        System.out.println();
+        // Edge case 4: A large list with random order
+        System.out.println("Edge Case 4: Large List with Random Order");
+        list.clear();
+        list.add(10);
+        list.add(5);
+        list.add(8);
+        list.add(2);
+        list.add(9);
+        list.add(15);
+        list.add(1);
+        list.add(7);
+        list.add(6);
+        System.out.println("Original list:");
+        list.printAll();
+        list.sort();
+        System.out.println("Sorted list:");
+        list.printAll();
+        System.out.println();
+        // Edge case 5: A list already sorted in ascending order
+        System.out.println("Edge Case 5: List Already Sorted in Ascending Order");
+        list.clear();
+        list.add(1);
+        list.add(2);
+        list.add(3);
+        list.add(4);
+        list.add(5);
+        System.out.println("Original list:");
+        list.printAll();
+        list.sort();
+        System.out.println("Sorted list:");
+        list.printAll();
+        System.out.println();
+        // Edge case 6: A list sorted in descending order
+        System.out.println("Edge Case 6: List Sorted in Descending Order");
+        list.clear();
+        list.add(5);
+        list.add(4);
+        list.add(3);
+        list.add(2);
+        list.add(1);
+        System.out.println("Original list:");
+        list.printAll();
+        list.sort();
         System.out.println("Sorted list:");
         list.printAll();
         System.out.println();
