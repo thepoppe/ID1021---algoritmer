@@ -46,24 +46,37 @@ public class QuickList <T extends Comparable<T>>{
 
     public void append(QuickList<T> tail){
         if (tail != null){
+
             if (this.last != null)
                 this.last.next = tail.first;
             else this.first = tail.first;
+
+            //assigns last to the last in tail
             if(tail.last!=null)
                 this.last = tail.last;
+
+            //to ensure the temp list has no connections
+            tail.first=null;
+            tail.last=null;
         }
     }
 
 
     public void prepend(QuickList<T> front){
-        if(front != null){
-            if(front.last != null)
-                this.last.next = this.first;
-            if (this.last == null)
-                this.last = front.last;
-            if(front.first != null)
-                this.first = front.first;
+        //if the list front contains nodes
+        if(front != null && front.last!=null){
 
+            //if this aka the pivot happens to be null
+            if (this.last == null){
+                this.first = front.first;
+                this.last = front.last;
+            }
+            else{
+                front.last.next = this.first;
+                first = front.first;
+            }
+
+            //to ensure the temp list has no connections
             front.first = null;
             front.last = null;
         }
@@ -72,12 +85,17 @@ public class QuickList <T extends Comparable<T>>{
 
 
     private void cons(Node node){
+        //insert the node at the last place
         if ( this.first == null)
             first = last = node;
+
         else{
             last.next = node;
             last = last.next;
         }
+
+        //ensure that its next pointer is not pointing to something else
+        node.next = null;
     }
 
     public void sort(){
@@ -93,21 +111,34 @@ public class QuickList <T extends Comparable<T>>{
         T pivotItem = pivot.item;
         Node current =  pivot.next;
 
+        //disconnects this from current
+        this.last = this.first;
+        this.last.next = null;
+
+
+
         //partition
         while (current!= null){
+            //important to move to the next since cons remove the next pointer
             Node next = current.next;
+
+            //sort into lists
             if(pivotItem.compareTo(current.item)> 0)
                 smaller.cons(current);
             else larger.cons(current);
             current =  next;
         }
 
+        //Separates the pivot aka this from the chain
+        this.first = this.last = pivot;
+        pivot.next = null;
+
+
         //recursive sort
         smaller.sort();
         larger.sort();
 
-        //merge
-        //This = pivot, other references are removed from "this".
+        //merge,   this = pivot, other references are removed from "this".
         this.append(larger);
         this.prepend(smaller);
 
