@@ -98,6 +98,7 @@ public class Heap {
         test.enqueue(4);
         test.enqueue(5);
         test.enqueue(6);
+        System.out.println("Done");
     }
 
 }
