@@ -6,44 +6,33 @@ public class Bench {
 
 
     public static void firstBench(int[] sizes, int rounds){
-        FirstPriority addConstant = new FirstPriority("add");
-        FirstPriority removeConstant = new FirstPriority("remove");
+        PriorityLinkedAdd addConstant = new PriorityLinkedAdd();
+        PriorityLinkedRemove removeConstant = new PriorityLinkedRemove();
         for ( int size : sizes){
 
             int[] listToAdd = createAddList(size);
             //warmup
-            for (int i = 0; i < 100; i++) {
-                for (int item : listToAdd)
-                    addConstant.add(item);
-                for (int j = 0; j < 100; j++)
-                    addConstant.remove();
-            }
 
+            System.out.printf("%10d",size);
             double minT = Double.MAX_VALUE;
             for (int i = 0; i < rounds; i++) {
                 addConstant.clear();
                 double t0,t1,time;
+
                 t0 = System.nanoTime();
                 for (int item : listToAdd)
                     addConstant.add(item);
-                for (int j = 0; j < size; j++)
-                    addConstant.remove();
                 t1 = System.nanoTime();
-                time = t1-t0;
+
+                time = (t1-t0)/size;
 
                 if (time < minT)
                     minT = time;
             }
-            System.out.printf("%10d%20.2f",size,minT);
+            System.out.printf("%20.1f",
+                    minT);
 
 
-            //warmup
-            for (int i = 0; i < 100; i++) {
-                for (int item : listToAdd)
-                    removeConstant.add(item);
-                for (int j = 0; j < 100; j++)
-                    removeConstant.remove();
-            }
 
             minT = Double.MAX_VALUE;
             for (int i = 0; i < rounds; i++) {
@@ -52,15 +41,14 @@ public class Bench {
                 t0 = System.nanoTime();
                 for (int item : listToAdd)
                     removeConstant.add(item);
-                for (int j = 0; j < size; j++)
-                    removeConstant.remove();
+
                 t1 = System.nanoTime();
-                time = t1-t0;
+                time = (t1-t0)/size;
 
                 if (time < minT)
                     minT = time;
             }
-            System.out.printf("%20.2f\n",minT);
+            System.out.printf("%20.1f\n",minT);
 
         }
 
