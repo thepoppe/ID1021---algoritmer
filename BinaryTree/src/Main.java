@@ -3,9 +3,9 @@ import java.util.Random;
 public class Main {
 
     public static void main(String[] args) {
-        int[] sizes = {500,1000,2000,4000,8000,16000};
-        int  rounds = 10000;
-        functionalityPrintLargeTree();
+        int[] sizes = {500,1000,2000,4000,8000,16000,100000};
+        int  rounds = 10;
+        firstTest(sizes,rounds);
     }
 
 
