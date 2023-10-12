@@ -10,6 +10,53 @@ public class Bench {
 
     public static void benchArrayHeap(int[] sizes, int rounds){
 
+
+        System.out.printf("%10s%20s%20s\n","Size","linked","array");
+        for (int size : sizes){
+            int[] listToAdd = createAddList(size);
+            ArrayHeap array = new ArrayHeap(size);
+            Heap linked = new Heap();
+            for(int i = 0; i < rounds; i++){
+                array.clear();
+                linked.clear();
+                for(int item : listToAdd){
+                    array.add(item);
+                    linked.enqueue(item);
+                }
+            }
+
+            double minT1 = Double.MAX_VALUE, minT2 =Double.MAX_VALUE;
+            double t0,t1,time;
+            for(int i = 0; i<rounds; i++){
+               array.clear();
+               linked.clear();
+
+                t0 = System.nanoTime();
+                for(int item : listToAdd){
+                    linked.enqueue(item);
+                    linked.dequeue();
+                }
+                t1 = System.nanoTime();
+                time = (t1-t0);
+                if (time < minT1)
+                    minT1 = time;
+
+                t0 = System.nanoTime();
+                for(int item : listToAdd){
+                    linked.enqueue(item);
+                    linked.dequeue();
+                }
+                t1 = System.nanoTime();
+                time = (t1-t0);
+                if (time < minT2)
+                    minT2 = time;
+
+            }
+
+            System.out.printf("%5d%20.0f%20.0f\n",size,minT1,minT2);
+
+
+        }
     }
 
     public static  void benchHeap(int[] sizes, int rounds){

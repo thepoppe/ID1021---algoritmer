@@ -23,7 +23,7 @@ public class ArrayHeap {
             last++;
 
         }
-        else if(last == array.length-1){
+        else if(last == array.length){
             System.out.printf("Full");
 
         }
@@ -171,7 +171,7 @@ public class ArrayHeap {
         System.out.println("Size: " + pq.getLength());
     }
 
-    private void clear() {
+    public void clear() {
         for ( int i = 0; i <  last; i++)
             array[i] = null;
         last = 0;
