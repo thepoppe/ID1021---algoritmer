@@ -1,13 +1,112 @@
-import java.util.DoubleSummaryStatistics;
+
+import java.util.ArrayList;
+
+
 import java.util.Random;
+
+
 
 public class Bench {
 
+    public static void benchArrayHeap(int[] sizes, int rounds){
+
+    }
+
+    public static  void benchHeap(int[] sizes, int rounds){
+        Heap test = new Heap();
+
+        int[] listToAdd = random1023(0,10000);
+        int[] listToPush = random1023(10,100);
+        ArrayList<Integer> depthOfPush = new ArrayList<>();
 
 
+        System.out.printf("%10s%20s%20s%20s\n", "run","adding", "pushing", "removing&adding");
+        for ( int size : sizes){
+
+            //adding 1023 random elements to the heap
+            System.out.printf("%10d",1023);
+            double minT = Double.MAX_VALUE;
+            for (int i = 0; i < rounds; i++) {
+                double t0,t1,time;
+
+                test.clear();
+                t0 = System.nanoTime();
+                for (int item : listToAdd)
+                    test.enqueue(item);
+                t1 = System.nanoTime();
+
+                time = (t1-t0);
+
+                if (time < minT)
+                    minT = time;
+            }
+            System.out.printf("%20.1f", minT);
+
+            //test to increment all values
+            if (size == 1000){
+                test.clear();
+                for (int item : listToAdd)
+                    test.enqueue(item);
+                for (int item : listToPush)
+                    depthOfPush.add(test.push(item));
+            }
+
+
+
+            //time to push 1023 elements
+            minT = Double.MAX_VALUE;
+            for (int i = 0; i < rounds; i++) {
+                double t0,t1,time;
+                test.clear();
+                for (int item : listToAdd)
+                    test.enqueue(item);
+
+                t0 = System.nanoTime();
+                for (int item : listToPush)
+                    test.push(item);
+                t1 = System.nanoTime();
+                time = (t1-t0);
+
+                if (time < minT)
+                    minT = time;
+            }
+            System.out.printf("%20.1f", minT);
+
+
+
+
+            minT = Double.MAX_VALUE;
+            for (int i = 0; i < rounds; i++) {
+                double t0,t1,time;
+
+                test.clear();
+                for (int item : listToAdd)
+                    test.enqueue(item);
+                t0 = System.nanoTime();
+                for (int item : listToAdd){
+                    test.dequeue();
+                    test.enqueue(item);
+                }
+                t1 = System.nanoTime();
+
+                time = (t1-t0);
+
+                if (time < minT)
+                    minT = time;
+            }
+            System.out.printf("%20.1f\n", minT);
+
+        }
+
+
+        System.out.println(depthOfPush.toString());
+
+    }
     public static void firstBench(int[] sizes, int rounds){
         PriorityLinkedAdd addConstant = new PriorityLinkedAdd();
         PriorityLinkedRemove removeConstant = new PriorityLinkedRemove();
+
+
         for ( int size : sizes){
 
             int[] listToAdd = createAddList(size);
@@ -55,6 +154,15 @@ public class Bench {
 
 
 
+    }
+    private static int[] random1023(int origin, int bound){
+        Random rnd = new Random();
+        int[] list = new int[1023];
+        for(int i =0; i < 1023; i++){
+            int next = rnd.nextInt(origin,bound);
+            list[i] =next;
+        }
+        return list;
     }
     private static int[] createAddList(int size){
         Random rnd = new Random();
