@@ -1,9 +1,0 @@
-
-
-append deck to another
-
-
-2_first = 1_next
-
-
-O(n
