@@ -1,14 +1,14 @@
 import java.io.BufferedReader;
 import java.io.FileReader;
-public class Zip {
+public class Zip2 {
     Node[] data;
     int max;
     public class Node {
-        String code;
+        Integer code;
         String name;
         Integer pop;
 
-        public Node(String code, String name, Integer pop){
+        public Node(Integer code, String name, Integer pop){
             this.code = code;
             this.name = name;
             this.pop = pop;
@@ -21,13 +21,13 @@ public class Zip {
 
 
 
-    public Node lookupLinear(String zip){
+    public Node lookupLinear(Integer zip){
         if (data == null)
             throw new IllegalArgumentException("No data");
 
         Node found = null;
         for ( int i = 0; i < max; i++){
-            if(data[i].code.compareToIgnoreCase(zip) == 0){
+            if(data[i].code.equals(zip)){
                 found = data[i];
                 break;
             }
@@ -35,7 +35,7 @@ public class Zip {
         return found;
     }
 
-    public Node lookupBinary(String zip) {
+    public Node lookupBinary(Integer zip) {
         if (data == null)
             throw new IllegalArgumentException("No data");
 
@@ -43,9 +43,9 @@ public class Zip {
         int high = max;
         while (low <= high){
             int mid = (low + high) / 2;
-            if(data[mid].code.compareToIgnoreCase(zip)==0)
+            if(data[mid].code.equals(zip))
                 return data[mid];
-            else if (data[mid].code.compareToIgnoreCase(zip) < 0)
+            else if (data[mid].code.compareTo(zip) < 0)
                 low = mid +1;
             else high = mid -1;
         }
@@ -53,14 +53,15 @@ public class Zip {
     }
 
 
-    public Zip(String file) {
+    public Zip2(String file) {
         data = new Node[10000];
         try (BufferedReader br = new BufferedReader(new FileReader(file))) {
             String line;
             int i = 0;
             while ((line = br.readLine()) != null) {
                 String[] row = line.split(",");
-                data[i++] = new Node(row[0], row[1], Integer.valueOf(row[2]));
+                Integer code = Integer.valueOf(row[0].replaceAll("\\s",""));
+                data[i++] = new Node(code, row[1], Integer.valueOf(row[2]));
             }
             max = i-1;
         } catch (Exception e) {
@@ -70,10 +71,9 @@ public class Zip {
     }
 
     public static void main(String[] args) {
-        Zip test = new Zip("Hash/postnummer.csv");
-
-        Node a = test.lookupLinear("111 15");
-        Node b = test.lookupBinary("984 99");
+        Zip2 test = new Zip2("Hash/postnummer.csv");
+        Node a = test.lookupLinear(11115);
+        Node b = test.lookupBinary(98499);
         System.out.println(a);
         System.out.println(b);
 

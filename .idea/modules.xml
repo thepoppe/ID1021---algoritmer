@@ -16,6 +16,7 @@
       <module fileurl="file://$PROJECT_DIR$/QuickSort/QuickSort.iml" filepath="$PROJECT_DIR$/QuickSort/QuickSort.iml" />
       <module fileurl="file://$PROJECT_DIR$/SortedUnsortedList/SortedUnsortedList.iml" filepath="$PROJECT_DIR$/SortedUnsortedList/SortedUnsortedList.iml" />
       <module fileurl="file://$PROJECT_DIR$/Sorting/Sorting.iml" filepath="$PROJECT_DIR$/Sorting/Sorting.iml" />
+      <module fileurl="file://$PROJECT_DIR$/T9/T9.iml" filepath="$PROJECT_DIR$/T9/T9.iml" />
     </modules>
   </component>
 </project>
