@@ -1,24 +1,27 @@
+import java.io.*;
 import java.util.ArrayList;
-import java.util.List;
+import java.util.Arrays;
+
 
 /**
  * Class T9 for the B grade assignment in the course id1021.
  * Some code copied from the assignment
  */
 public class T9 {
-    Node root;
+    private Node root;
+
 
     /**
      * The internal node structure
      */
     private class Node {
-        public Node[] next;
-        public boolean valid;
+        private Node[] next;
+        private boolean valid;
 
         /**
          * Constructor for the node
          */
-        public Node() {
+        private Node() {
             next = new Node[27];
             valid = false;
         }
@@ -27,7 +30,7 @@ public class T9 {
          * The internal recursive add method to add words to the trie.
          * @param word the word to add
          */
-        public void add(int[] word) {
+        private void add(int[] word) {
             if(word == null)
                 throw new IllegalArgumentException("not a word");
 
@@ -35,21 +38,34 @@ public class T9 {
                 int currentCode = word[0];
                 if (next[currentCode] == null) {
                     next[currentCode] = new Node();
-                    next[currentCode].add(removeFirst(word));
+                    System.out.println("Created a new node for code: " + currentCode);
                 }
+                next[currentCode].add(removeFirst(word));
             }
-            else
+            else{
                 this.valid = true;
+                System.out.println("Set valid to true for word: " + Arrays.toString(word));
+            }
         }
 
-        public List<String> collect(int[] numbers) {
-            List<String> list = new ArrayList<>();
-            if(numbers.length > 0){
+        private void collect(int[] numbers, String str, ArrayList<String> list) {
+            if(numbers.length > 0 && !valid){
+                for (int i = 0; i < 3; i++){
+                    int index = 3*numbers[0]+i;
+
+                    String nextString = str;
+                    if(next[index] != null){
+                        nextString += characterFrom(index);
+                        int[] number = removeFirst(numbers);
+                        next[index].collect(number, nextString, list);
+                    }
+                    //break removed
+                }
 
             }
 
-
-            return list;
+            if(numbers.length == 0)
+                list.add(str);
         }
     }
 
@@ -60,12 +76,11 @@ public class T9 {
      * @return the smaller list
      */
     private int[] removeFirst(int[] array){
-        if(array == null)
+        if(array == null||array.length ==0)
             throw new IllegalArgumentException("cant remove from empty list");
 
         int[] smaller = new int[array.length - 1];
-        for (int i = 0; i < smaller.length; i++)
-            smaller[i] = array[i + 1];
+        System.arraycopy(array, 1, smaller, 0, smaller.length);
 
         return smaller;
     }
@@ -75,6 +90,27 @@ public class T9 {
      */
     public T9(){
         root = new Node();
+    }
+
+
+    /**
+     * Constructor to add the words of the given file to the trie
+     * @param file the words to add
+     */
+    public T9(String file){
+        try (BufferedReader br = new BufferedReader(new FileReader(file))) {
+            String line;
+            root = new Node();
+            while ((line = br.readLine()) != null) {
+                addWord(line);
+            }
+
+
+        } catch (FileNotFoundException e) {
+            throw new RuntimeException("File: "+file+" not found");
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
     }
 
 
@@ -104,18 +140,11 @@ public class T9 {
     }
 
 
-    public String lookUp(String keySequence){
-
-
-        return null;
-    }
-
-    private void decode(String keySequence){
-        List<String> allMatchingWords = new ArrayList<>();
+    public ArrayList<String> decode(String keySequence){
+        ArrayList<String> allMatchingWords = new ArrayList<>();
         int[] numbers = convertCharToInt(keySequence);
-        allMatchingWords = root.collect(numbers);
-
-
+        root.collect(numbers, "", allMatchingWords);
+        return allMatchingWords;
     }
 
     private int[] convertCharToInt(String numbers){
@@ -125,7 +154,7 @@ public class T9 {
         return list;
     }
 
-    private static int codeFrom(char character) {
+    public static int codeFrom(char character) {
         switch (character) {
             case 'a':
                 return 0;
@@ -301,6 +330,10 @@ public class T9 {
 
     public static void main(String[] args) {
         T9 t9 = new T9();
-        t9.addWord("help");
+        t9.addWord("and");
+        t9.addWord("amd");
+        t9.addWord("bod");
+        t9.addWord("cod");
+        t9.decode("152");
     }
     }
