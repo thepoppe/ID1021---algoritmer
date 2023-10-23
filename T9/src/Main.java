@@ -8,12 +8,33 @@ public class Main {
 
 
     public static void main(String[] args) {
-        T9 t9 = new T9("T9/kelly.txt");
-        ArrayList<String> kelly= readKelly("T9/kelly.txt");
+        T9 t9 = new T9("T9/Kelly.txt");
+        ArrayList<String> kelly= readKelly("T9/Kelly.txt");
         String[] kellyInNum = convertToCode(kelly);
-        System.out.println(kelly.get(0));
-        System.out.println(kellyInNum[0]);
-        System.out.println(t9.decode(kellyInNum[0]));
+        System.out.println(kelly.get(7500));
+        System.out.println(kellyInNum[7500]);
+        System.out.println(t9.decode("6877243725"));
+    }
+
+    private static void testAll(){
+        T9 t9 = new T9("T9/Kelly.txt");
+        ArrayList<String> kelly= readKelly("T9/Kelly.txt");
+        String[] kellyInNum = convertToCode(kelly);
+
+        int matches = 0, nonMatching = 0, i= 0;
+        for(String seq: kellyInNum){
+            ArrayList<String> found = t9.decode(seq);
+            if(found.contains(kelly.get(i++)))
+                matches++;
+            else nonMatching++;
+
+        }
+
+        System.out.println("Total words: "+kelly.size());
+        System.out.println("matches: "+matches);
+        System.out.println("misses: "+nonMatching);
+        System.out.println("size of kelly == matches : "+(kelly.size()==matches));
+
     }
 
     private static ArrayList<String> readKelly(String file){
@@ -59,7 +80,9 @@ public class Main {
                 wordInNum+="7";
             else if (code<=23)
                 wordInNum+="8";
-            }
+            else if (code<=26)
+                wordInNum+="9";
+        }
         return wordInNum;
     }
 

@@ -1,6 +1,5 @@
 import java.io.*;
 import java.util.ArrayList;
-import java.util.Arrays;
 
 
 /**
@@ -38,33 +37,29 @@ public class T9 {
                 int currentCode = word[0];
                 if (next[currentCode] == null) {
                     next[currentCode] = new Node();
-                    System.out.println("Created a new node for code: " + currentCode);
                 }
                 next[currentCode].add(removeFirst(word));
             }
             else{
                 this.valid = true;
-                System.out.println("Set valid to true for word: " + Arrays.toString(word));
             }
         }
 
         private void collect(int[] numbers, String str, ArrayList<String> list) {
-            if(numbers.length > 0 && !valid){
+            if(numbers.length > 0){
                 for (int i = 0; i < 3; i++){
                     int index = 3*numbers[0]+i;
-
                     String nextString = str;
                     if(next[index] != null){
                         nextString += characterFrom(index);
                         int[] number = removeFirst(numbers);
                         next[index].collect(number, nextString, list);
                     }
-                    //break removed
                 }
 
             }
 
-            if(numbers.length == 0)
+            if(valid && numbers.length == 0)
                 list.add(str);
         }
     }

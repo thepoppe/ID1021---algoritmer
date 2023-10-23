@@ -31,22 +31,7 @@ public class FirstPriority {
                 i++;
             }
             constantRemove.add(i,item);
-            /*
-            if(i == constantRemove.size())
-                constantRemove.add(item);
-            else {
-                Integer currentItem = constantRemove.get(i);
-                constantRemove.add(i, item);
 
-                //move smaller objects back
-                int j = i + 1;
-                while (j < constantRemove.size()) {
-                    Integer next = constantRemove.get(j);
-                    constantRemove.add(j, currentItem);
-                    currentItem = next;
-                    j++;
-                }
-            }*/
         }
         else return;
     }

@@ -72,23 +72,26 @@ public class ZipWBucket {
         data = new Bucket[capacity];
         try (BufferedReader br = new BufferedReader(new FileReader(file))) {
             String line;
-            max = 0;
             while ((line = br.readLine()) != null) {
                 String[] row = line.split(",");
                 Integer code = Integer.valueOf(row[0].replaceAll("\\s",""));
-                if(data[keyToHash(code)]!= null)
-                    data[keyToHash(code)].add(new Node(code, row[1], Integer.valueOf(row[2])));
-                else {
-                    data[keyToHash(code)] = new Bucket(new Node(code, row[1], Integer.valueOf(row[2])));
-                    max++;
-                }
+                
+                Node zipInfo = new Node(code, row[1], Integer.valueOf(row[2]));
+                int hashIndex = keyToHash(code);
+                addToArray(hashIndex,zipInfo);
             }
-            max--;
 
         } catch (Exception e) {
             System.out.println("file" + file + " not found");
         }
+    }
 
+    private void addToArray(int index, Node node) {
+        if (data[index] != null)
+            data[index].add(node);
+        else {
+            data[index] = new Bucket(node);
+        }
     }
 
     private Integer keyToHash(Integer key){

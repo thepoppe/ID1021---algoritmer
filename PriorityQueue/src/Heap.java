@@ -153,6 +153,7 @@ public class Heap {
     }
 
 
+
     public void printHeap() {
         if (root == null) {
             System.out.println("Heap is empty.");
@@ -180,7 +181,64 @@ public class Heap {
             System.out.println(); // Move to the next level
         }
     }
+/*
 
+    private static int depth;
+    public int push2(int incr){
+        this.root.priority += incr;
+        depth =0;
+        pushHelp(root);
+        return depth;
+    }
+
+    private void pushHelp(Node curr) {
+        if(curr.left==null && curr.right ==null)
+            return;
+
+        depth++;
+        if (curr.right == null){
+            if(curr.left.priority < curr.priority) {
+                swap(curr.left.priority, curr.priority);
+                pushHelp(curr.left);
+            }
+        }
+        else if( curr.left == null){
+            if(curr.right.priority < curr.priority) {
+                swap(curr.right.priority, curr.priority);
+                pushHelp(curr.right);
+            }
+
+        }
+        else {
+            if ( curr.left.priority < curr.right.priority){
+                if(curr.left.priority < curr.priority) {
+                    swap(curr.left.priority, curr.priority);
+                    pushHelp(curr.left);
+                }
+            }
+            else {
+                if(curr.right.priority < curr.priority) {
+                    swap(curr.right.priority, curr.priority);
+                    pushHelp(curr.right);
+                }
+            }
+        }
+    }
+
+    if (left.prio < right.prio){
+        if (left.prio < prio){
+            swap ( left )
+            left.push();
+            }
+        }
+    else{
+        if (right.prio < prio){
+            swap ( right )
+            right.push();
+            }
+        }
+
+*/
     public static void main(String[] args) {
         Heap heap = new Heap();
 
