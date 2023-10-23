@@ -1,44 +1,49 @@
 public class PathsWithMax {
     City[] path;
     int sp;
-    Integer max;
-
     public PathsWithMax() {
         path = new City[54];
         sp = 0;
-        max = null;
     }
 
-    private Integer shortest(City from, City to) {
+    private Integer shortest(City from, City to, Integer max) {
 
         Integer shrt = null;
-        if(from.hasConnection()){
-            City.Node cityNode= from.getFirst();
-            do{
 
-                if (from.equals(to))
-                    return 0;
+        if (from.equals(to))
+            return 0;
 
-                for (int i = 0; i < sp; i++) {
-                    if (path[i] == from)
-                        return null;
-                }
-                path[sp++] = from;
-
-                Connection connection = cityNode.getConnection();
-                cityNode = cityNode.getNext();
-                City nextCity = connection.getCity();
-                Integer time = connection.getDistance();
-                Integer recursionTime = shortest(nextCity, to);
-                path[sp--] = null;
-
-                if(recursionTime!=null) {
-                    if (shrt == null || (recursionTime + time) < shrt)
-                        shrt = recursionTime + time;
-                }
-
-            } while(cityNode!=null);
+        for (int i = 0; i < sp; i++) {
+            if (path[i] == from)
+                return null;
         }
+        path[sp++] = from;
+
+        City.Node cityNode= from.getFirst();
+        while(cityNode!=null){
+            Connection connection = cityNode.getConnection();
+            City nextCity = connection.getCity();
+            Integer time = connection.getDistance();
+
+            Integer nextMax = null;
+            if (shrt!=null)
+                nextMax = max-time;
+
+            Integer recursionTime = shortest(nextCity, to, nextMax);
+
+            if (recursionTime != null) {
+                if (shrt == null || (recursionTime + time) < shrt)
+                    shrt = recursionTime + time;
+                if (max == null || recursionTime < max) {
+                    max = recursionTime;
+                }
+            }
+
+            cityNode = cityNode.getNext();
+
+        }
+        path[sp--] = null;
+
         return shrt;
     }
 
@@ -60,9 +65,9 @@ public class PathsWithMax {
             String from = pair.from();
             String to = pair.to();
             long t0 = System.nanoTime();
-            //Integer dist = path.shortest(map.lookup(from), map.lookup(to), path.max);
+            Integer dist = path.shortest(map.lookup(from), map.lookup(to), null);
             long time = (System.nanoTime() - t0) / 1_000;
-            //System.out.println(pair.from() + "->" + pair.to() + "\tshortest: " + dist + " min (" + time + " ms)");
+            System.out.println(pair.from() + "->" + pair.to() + "\tshortest: " + dist + " min (" + time + " ms)");
         }
         }
 
