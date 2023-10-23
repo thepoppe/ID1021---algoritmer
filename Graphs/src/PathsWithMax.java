@@ -1,9 +1,9 @@
-public class Paths2dot0 {
+public class PathsWithMax {
     City[] path;
     int sp;
     Integer max;
 
-    public Paths2dot0() {
+    public PathsWithMax() {
         path = new City[54];
         sp = 0;
         max = null;
@@ -44,7 +44,7 @@ public class Paths2dot0 {
 
     public static void main(String[] args) {
         Map map = new Map("C:\\GIT\\ID1021---algoritmer\\Graphs\\src\\trains.csv");
-        Paths2dot0 path = new Paths2dot0();
+        PathsWithMax path = new PathsWithMax();
         Pair[] pairs = {
                 new Pair("Malmö", "Göteborg", 200),
                 new Pair("Göteborg", "Stockholm", 250),
