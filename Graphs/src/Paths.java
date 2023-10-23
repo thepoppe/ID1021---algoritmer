@@ -10,39 +10,37 @@ public class Paths {
     private Integer shortest(City from, City to) {
 
         Integer shrt = null;
-        if(from.hasConnection()){
-            City.Node cityNode= from.getFirst();
-            do{
 
-                if (from.equals(to))
-                    return 0;
+        City.Node cityNode= from.getFirst();
 
-                for (int i = 0; i < sp; i++) {
-                    if (path[i] == from)
-                        return null;
-                }
-                path[sp++] = from;
+        if (from.equals(to))
+                return 0;
+        for (int i = 0; i < sp; i++) {
+            if (path[i] == from)
+                return null;
+            }
 
-                Connection connection = cityNode.getConnection();
-                cityNode = cityNode.getNext();
-                City nextCity = connection.getCity();
-                Integer time = connection.getDistance();
-                Integer recursionTime = shortest(nextCity, to);
-                path[sp--] = null;
-
-                if(recursionTime!=null) {
-                    if (shrt == null || (recursionTime + time) < shrt)
-                        shrt = recursionTime + time;
+        path[sp++] = from;
+        while(cityNode!=null){
+            Connection connection = cityNode.getConnection();
+            cityNode = cityNode.getNext();
+            City nextCity = connection.getCity();
+            Integer time = connection.getDistance();
+            Integer recursionTime = shortest(nextCity, to);
+            if(recursionTime!=null) {
+                if (shrt == null || (recursionTime + time) < shrt)
+                    shrt = recursionTime + time;
                 }
 
-            } while(cityNode!=null);
         }
+        path[sp--] = null;
+
         return shrt;
     }
 
 
     public static void main(String[] args) {
-        Map map = new Map("C:\\GIT\\ID1021---algoritmer\\Graphs\\src\\trains.csv");
+        Map map = new Map("C:\\Users\\pontu\\IdeaProjects\\ID1021---algoritmer\\Graphs\\src\\trains.csv");
         Paths path = new Paths();
 
         Pair[] pairs = {

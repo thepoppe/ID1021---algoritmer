@@ -6,10 +6,11 @@ public class Naive {
             return null;
         if (from == to)
             return 0;
+
         Integer shrt = null;
-        if(from.hasConnection()){
         City.Node cityNode= from.getFirst();
-        do{
+
+        while(cityNode!=null){
             Connection connection = cityNode.getConnection();
             cityNode = cityNode.getNext();
             City nextCity = connection.getCity();
@@ -19,19 +20,18 @@ public class Naive {
 
 
             if(recursionTime!=null) {
-                if (shrt == null || (recursionTime + time) < shrt)
+                if (shrt == null || (recursionTime + time) < shrt){
                     shrt = recursionTime + time;
+                    //max =shrt; // dynamiskt tillagd påå lektionen
+                }
             }
-        } while(cityNode!=null);
-
-
-
         }
+
         return shrt;
     }
 
     public static void main(String[] args) {
-        Map map = new Map("C:\\GIT\\ID1021---algoritmer\\Graphs\\src\\trains.csv");
+        Map map = new Map("C:\\Users\\pontu\\IdeaProjects\\ID1021---algoritmer\\Graphs\\src\\trains.csv");
         Pair[] pairs = {
                 new Pair("Malmö", "Göteborg", 200),
                 new Pair("Göteborg", "Stockholm", 250),

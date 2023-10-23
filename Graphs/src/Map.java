@@ -64,7 +64,7 @@ public class Map {
     private Integer findFirstSlot(int index){
         Integer firstNull = index;
         while (cities[firstNull] != null)
-            firstNull++;
+            firstNull = (firstNull+1) %mod;
         return firstNull;
     }
 
@@ -74,7 +74,7 @@ public class Map {
         while(cities[linearProbe] !=null){
             if(cities[linearProbe].getName().equalsIgnoreCase(name))
                 return linearProbe;
-            linearProbe++;
+            linearProbe = (linearProbe+1)%mod;
         }
         return null;
     }

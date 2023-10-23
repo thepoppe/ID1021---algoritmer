@@ -13,6 +13,9 @@ public class PathsWithMax {
         if (from.equals(to))
             return 0;
 
+        if( (max!=null)&&(max < 0)) //Change added from lecture
+            return null;            //Change added from lecture
+
         for (int i = 0; i < sp; i++) {
             if (path[i] == from)
                 return null;
@@ -26,17 +29,17 @@ public class PathsWithMax {
             Integer time = connection.getDistance();
 
             Integer nextMax = null;
-            if (shrt!=null)
-                nextMax = max-time;
+            if (max!=null)          //Change added from lecture
+                nextMax = max-time; //Change added from lecture
 
             Integer recursionTime = shortest(nextCity, to, nextMax);
 
-            if (recursionTime != null) {
-                if (shrt == null || (recursionTime + time) < shrt)
+            if(recursionTime!=null) {
+                if (shrt == null || (recursionTime + time) < shrt){
                     shrt = recursionTime + time;
-                if (max == null || recursionTime < max) {
-                    max = recursionTime;
+                    max = shrt; // dynamiskt tillagd påå lektionen
                 }
+
             }
 
             cityNode = cityNode.getNext();
@@ -48,7 +51,7 @@ public class PathsWithMax {
     }
 
     public static void main(String[] args) {
-        Map map = new Map("C:\\GIT\\ID1021---algoritmer\\Graphs\\src\\trains.csv");
+        Map map = new Map("C:\\Users\\pontu\\IdeaProjects\\ID1021---algoritmer\\Graphs\\src\\trains.csv");
         PathsWithMax path = new PathsWithMax();
         Pair[] pairs = {
                 new Pair("Malmö", "Göteborg", 200),
