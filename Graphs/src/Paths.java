@@ -40,7 +40,7 @@ public class Paths {
 
 
     public static void main(String[] args) {
-        Map map = new Map("C:\\Users\\pontu\\IdeaProjects\\ID1021---algoritmer\\Graphs\\src\\trains.csv");
+        Map map = new Map("Graphs/trains.csv");
         Paths path = new Paths();
 
         Pair[] pairs = {

@@ -51,7 +51,7 @@ public class PathsWithMax {
     }
 
     public static void main(String[] args) {
-        Map map = new Map("C:\\Users\\pontu\\IdeaProjects\\ID1021---algoritmer\\Graphs\\src\\trains.csv");
+        Map map = new Map("Graphs/trains.csv");
         PathsWithMax path = new PathsWithMax();
         Pair[] pairs = {
                 new Pair("Malmö", "Göteborg", 200),
@@ -71,7 +71,13 @@ public class PathsWithMax {
             Integer dist = path.shortest(map.lookup(from), map.lookup(to), null);
             long time = (System.nanoTime() - t0) / 1_000;
             System.out.println(pair.from() + "->" + pair.to() + "\tshortest: " + dist + " min (" + time + " ms)");
+
+
+
+
         }
+
+        System.out.println(path.shortest(map.lookup("Gävle"),map.lookup("Sundsvall"),null));
         }
 
 

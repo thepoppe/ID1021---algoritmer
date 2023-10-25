@@ -31,7 +31,7 @@ public class Naive {
     }
 
     public static void main(String[] args) {
-        Map map = new Map("C:\\Users\\pontu\\IdeaProjects\\ID1021---algoritmer\\Graphs\\src\\trains.csv");
+        Map map = new Map("Graphs/trains.csv");
         Pair[] pairs = {
                 new Pair("Malmö", "Göteborg", 200),
                 new Pair("Göteborg", "Stockholm", 250),
