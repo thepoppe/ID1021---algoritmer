@@ -37,7 +37,7 @@ public class PathsWithMax {
             if(recursionTime!=null) {
                 if (shrt == null || (recursionTime + time) < shrt){
                     shrt = recursionTime + time;
-                    max = shrt; // dynamiskt tillagd påå lektionen
+                    max = shrt; // dynamiskt tillagd på lektionen
                 }
 
             }

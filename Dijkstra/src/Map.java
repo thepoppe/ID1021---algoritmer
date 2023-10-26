@@ -45,6 +45,7 @@ public class Map {
         if(cities[index]== null) {
              return cities[index] = new City(name, idCounter++);
         }
+
         City city = cities[index];
         if (city.getName().equals(name))
             return city;

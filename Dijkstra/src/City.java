@@ -6,6 +6,7 @@ public class City {
     private ArrayList<Connection> neighbours;
     private Integer id;
 
+
     public ArrayList<Connection> getNeighbours() {
         return neighbours;
     }
@@ -14,6 +15,9 @@ public class City {
     }
     public String toString(){
         return this.name;
+    }
+    public Integer getId() {
+        return id;
     }
 
     public City(String name, int id){
@@ -27,9 +31,7 @@ public class City {
     }
 
 
-    public Integer getId() {
-        return id;
-    }
+
 
 
 

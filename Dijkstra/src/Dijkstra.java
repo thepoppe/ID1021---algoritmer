@@ -1,68 +1,76 @@
-import java.util.ArrayList;
+import java.util.*;
+import java.util.Map;
 
 public class Dijkstra {
     private PriorityQueue queue;
     private ArrayList<Path> done; // hashmap is probably better
 
+    private HashMap<Integer, Path> newDone;
+
+
 
     public Dijkstra(){
         queue = new PriorityQueue();
         done = new ArrayList<>();
+        newDone = new HashMap<>();
     }
 
 
     public Integer findShortest(City sourceCity, City targetCity) {
         queue.clear();
         done.clear();
+        newDone.clear();
 
+        var processed = new HashMap<Integer, Path>();
         queue.add(new Path(sourceCity, null, 0));
-        Integer targetIndex = null;
+
+
 
         while (!queue.isEmpty()){
 
             //remove first entry
             Path current = queue.poll();
             City currentCity = current.getCity();
-
             Integer currentDist = current.getDist();
 
             //otherwise add it to processed set
-            done.add(current);
+            newDone.put(currentCity.getId(),current);
 
 
             //if it's the destination break. Doesn't work. PROBAbly works now with ok prio queue
             if (currentCity == targetCity){
-                //return currentDist;
-                targetIndex = done.size()-1;
-                break;
+                return newDone.get(targetCity.getId()).getDist();
             }
 
             //done previously here
 
 
 
+
             //for each connection
             for (Connection connection : currentCity.getNeighbours()){
+
                 City connectedCity = connection.getCity();
                 Integer connectedDist = connection.getDistance();
 
                 Integer newDist = currentDist + connectedDist;
 
                 //måste kolla i done först. Borde kanske returnera path
-                Path visitedPath =alreadyVisited(connectedCity);
+                Path visitedPath = alreadyVisited(connectedCity);
                 if(visitedPath != null){
-                    if( visitedPath.getDist() > newDist)
+                    if(visitedPath.getDist() > newDist)
                         visitedPath.updatePath(newDist, currentCity);
                     continue;
                 }
 
                //bättre sätt??? kan finnas dubbletter annars se onenote
-                Path path = queue.contains(connectedCity);
+                Path path = null;
+                if(processed.containsKey(connectedCity.getId()))
+                    path = processed.get(connectedCity.getId());
 
                 //If a path city is found in the queue (if its index is not null), update
                 // if possible the shortest path to that city and update the queue.
-                if(path!= null){
-
+                if(path != null && path.getIndex()!= null){
 
                     if(newDist < path.getDist()) {
                         queue.updatePath(path, newDist, currentCity);
@@ -72,19 +80,23 @@ public class Dijkstra {
                     }
                 }
                     //If the city is not found in the queue, add a new path to the queue.
-                else queue.add(new Path(connectedCity, currentCity, newDist));
+                else {
+                    Path processedPath = new Path(connectedCity, currentCity, newDist);
+                    queue.add(processedPath);
+                    processed.put(connectedCity.getId(), processedPath);
+                }
 
 
             }
         }
 
-        return ( targetIndex != null) ? done.get(targetIndex).getDist() : targetIndex;
+        return null;
     }
 
     private Path alreadyVisited(City connectedCity) {
-        for ( Path path : done)
-            if(path.getCity().equals(connectedCity))
-                return path;
+        if (newDone.containsKey(connectedCity.getId())){
+             return newDone.get(connectedCity.getId());
+        }
         return null;
     }
 
