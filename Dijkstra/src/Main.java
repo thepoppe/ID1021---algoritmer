@@ -4,6 +4,7 @@ public class Main {
         Dijkstra dijkstra = new Dijkstra();
         Map map = new Map("Dijkstra/europe.csv");
 
+
         TestPath[] tests = {
                 new TestPath(map.lookup("Malmö"), map.lookup("Göteborg")),
                 new TestPath(map.lookup("Göteborg"), map.lookup("Stockholm")),
@@ -14,9 +15,10 @@ public class Main {
                 new TestPath(map.lookup("Sundsvall"), map.lookup("Umeå")),
                 new TestPath(map.lookup("Umeå"), map.lookup("Göteborg")),
                 new TestPath(map.lookup("Göteborg"), map.lookup("Umeå")),
-                new TestPath(map.lookup("Jönköping"), map.lookup("Barcelona")),
-                new TestPath(map.lookup("Glasgow"), map.lookup("Rom")),
+                new TestPath(map.lookup("Umeå"), map.lookup("Barcelona")),
+                new TestPath(map.lookup("Glasgow"), map.lookup("Rom"))
         };
+
 
         for (TestPath test : tests) {
             City from = test.from();
@@ -29,6 +31,9 @@ public class Main {
 
 
 
+
+
+        System.out.println(dijkstra.findShortest(map.lookup("Göteborg"),map.lookup("Sundsvall")));
 
     }
 }
