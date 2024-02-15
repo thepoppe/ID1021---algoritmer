@@ -13,11 +13,14 @@ public class Map {
     private final int mod = 541;
     static int collisions = 0;
 
+    int size;
+
 
     public Map(String file) {
         cities = new City[mod];
         try (BufferedReader br = new BufferedReader(new FileReader(file))) {
 
+            size =0;
             String line;
             while ((line = br.readLine()) != null) {
                 String[] row = line.split(",");
@@ -43,6 +46,7 @@ public class Map {
     City lookup(String name){
         int index = hash(name);
         if(cities[index]== null) {
+            size++;
              return cities[index] = new City(name);
         }
 
@@ -56,7 +60,9 @@ public class Map {
 
         collisions++;
         probe = findFirstSlot(index);
+        size++;
         return cities[probe] = new City(name);
+
 
 
     }

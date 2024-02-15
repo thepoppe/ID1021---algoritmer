@@ -31,7 +31,7 @@ public class Naive {
     }
 
     public static void main(String[] args) {
-        Map map = new Map("Graphs/trains.csv");
+        Map map = new Map("Graphs/europe.csv");
         Pair[] pairs = {
                 new Pair("Malmö", "Göteborg", 200),
                 new Pair("Göteborg", "Stockholm", 250),
@@ -52,7 +52,7 @@ public class Naive {
              long t0 = System.nanoTime();
              Integer dist = shortest(map.lookup(from), map.lookup(to), max);
              long time = (System.nanoTime() - t0)/1_000;
-            System.out.println(pair.from() +"->"+ pair.to()+"\tshortest: " + dist + " min (" + time + " ms)");
+            System.out.println(pair.from() +"->"+ pair.to()+"\tshortest: " + dist + " min (" + time + " us)");
         }
 
 

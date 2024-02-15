@@ -64,21 +64,14 @@ public class Dijkstra {
                 }
 
                //bättre sätt??? kan finnas dubbletter annars se onenote
-                Path path = null;
-                if(processed.containsKey(connectedCity.getId()))
-                    path = processed.get(connectedCity.getId());
 
-                //If a path city is found in the queue (if its index is not null), update
-                // if possible the shortest path to that city and update the queue.
-                if(path != null && path.getIndex()!= null){
-
-                    if(newDist < path.getDist()) {
+                if(processed.containsKey(connectedCity.getId())){
+                    Path path = processed.get(connectedCity.getId());
+                    if(path.getIndex()!= null && newDist < path.getDist())
                         queue.updatePath(path, newDist, currentCity);
 
-                        //rearrange queue, this is done automatically for Priority Queue if the datatype uses "Comparable"
-
-                    }
                 }
+
                     //If the city is not found in the queue, add a new path to the queue.
                 else {
                     Path processedPath = new Path(connectedCity, currentCity, newDist);
@@ -101,7 +94,7 @@ public class Dijkstra {
     }
 
 
-
-
-
+    public int getDoneArraySize() {
+        return newDone.size();
+    }
 }

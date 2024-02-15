@@ -1,12 +1,15 @@
 public class PathsWithMax {
     City[] path;
     int sp;
-    public PathsWithMax() {
-        path = new City[54];
+
+    int testedNode;
+    public PathsWithMax(Map map) {
+        path = new City[map.size];
         sp = 0;
+        testedNode = 0;
     }
 
-    private Integer shortest(City from, City to, Integer max) {
+    public Integer shortest(City from, City to, Integer max) {
 
         Integer shrt = null;
 
@@ -21,7 +24,7 @@ public class PathsWithMax {
                 return null;
         }
         path[sp++] = from;
-
+        testedNode++;
         City.Node cityNode= from.getFirst();
         while(cityNode!=null){
             Connection connection = cityNode.getConnection();
@@ -52,7 +55,7 @@ public class PathsWithMax {
 
     public static void main(String[] args) {
         Map map = new Map("Graphs/trains.csv");
-        PathsWithMax path = new PathsWithMax();
+        PathsWithMax path = new PathsWithMax(map);
         Pair[] pairs = {
                 new Pair("Malmö", "Göteborg", 200),
                 new Pair("Göteborg", "Stockholm", 250),

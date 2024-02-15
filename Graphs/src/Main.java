@@ -3,17 +3,17 @@ import java.util.List;
 
 public class Main {
 
-    public void warmUp(Dijkstra dijkstra, City startCity, List<City> targetCities, int numberOfRuns) {
+    public void warmUp(PathsWithMax dijkstra, City startCity, List<City> targetCities, int numberOfRuns) {
         for (City targetCity : targetCities) {
             for (int i = 0; i < numberOfRuns; i++) {
-                dijkstra.findShortest(startCity, targetCity);
+                dijkstra.shortest(startCity, targetCity,null);
             }
         }
     }
 
 
 
-    public void testShortestPathsToCities(Dijkstra dijkstra, City startCity, List<City> targetCities) {
+    public void testShortestPathsToCities(PathsWithMax test, City startCity, List<City> targetCities) {
         for (City targetCity : targetCities) {
             long minT = Long.MAX_VALUE;
 
@@ -22,15 +22,15 @@ public class Main {
             double logArraySize = -1;
             double timeComplexity = -1;
             double timePerArraySize = -1;
-            for (int i = 0; i < 100; i++) {
+            for (int i = 0; i < 1; i++) {
                 long t0 = System.nanoTime();
-                distance = dijkstra.findShortest(startCity, targetCity);
-                long endt1Time = System.nanoTime();
+                distance = test.shortest(startCity, targetCity,null);
+                long endTime = System.nanoTime();
                 long elapsedTimeMicroseconds = (endTime - t0);
 
                 minT = Math.min(minT, elapsedTimeMicroseconds);
 
-                doneSize = dijkstra.getDoneArraySize();
+                doneSize = test.testedNode;
 
                 // Calculate the time complexity
                 timeComplexity = minT / (doneSize * Math.log(doneSize));
@@ -51,8 +51,9 @@ public class Main {
 
 
     public static void main(String[] args) {
-        Dijkstra dijkstra = new Dijkstra();
+
         Map map = new Map("Dijkstra/europe.csv");
+        PathsWithMax test = new PathsWithMax(map);
 
         City startCity = map.lookup("Köpenhamn");
 
@@ -72,14 +73,14 @@ public class Main {
 
         Main testClass = new Main();
 
-        int numberOfWarmUpRuns = 10000;
+        int numberOfWarmUpRuns = 1;
 
         System.gc();
         // Warm-up phase
-        testClass.warmUp(dijkstra, startCity,targetCities, numberOfWarmUpRuns);
+        //testClass.warmUp(test, startCity,targetCities, numberOfWarmUpRuns);
 
         // Main test phase
-        testClass.testShortestPathsToCities(dijkstra, startCity, targetCities);
+        testClass.testShortestPathsToCities(test, startCity, targetCities);
     }
 
 
